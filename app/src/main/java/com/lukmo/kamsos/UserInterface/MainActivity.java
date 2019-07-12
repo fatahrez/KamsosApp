@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.lukmo.kamsos.Models.User;
 import com.lukmo.kamsos.Networking.ServiceGenerator;
@@ -16,11 +17,14 @@ import java.io.IOException;
 import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textView = findViewById(R.id.textView);
 
         if (Build.VERSION.SDK_INT > 9){
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -31,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Call<User> call = userService.me();
         try {
             User user = call.execute().body();
-            Log.i(user.getUsername(), "onCreate: show token");
+            Log.i(user.getEmail(), "onCreate: show token");
+            textView.setText(user.getEmail());
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

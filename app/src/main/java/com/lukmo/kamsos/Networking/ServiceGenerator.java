@@ -1,15 +1,29 @@
 package com.lukmo.kamsos.Networking;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
     public static final String API_BASE_URL = "http://kamsos.herokuapp.com/api/v1/";
 
+//    private OkHttpClient httpClient(){
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//        return  new OkHttpClient().newBuilder()
+//                .addInterceptor(logging)
+//                .build();
+//
+//    }
+
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
 
     private static Retrofit.Builder builder = new Retrofit.Builder().
             baseUrl(API_BASE_URL)
