@@ -17,14 +17,14 @@ import java.io.IOException;
 import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
-    TextView textView;
+//    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = findViewById(R.id.textView);
+//        textView = findViewById(R.id.textView);
 
         if (Build.VERSION.SDK_INT > 9){
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             User user = call.execute().body();
             Log.i(user.getEmail(), "onCreate: show token");
-            textView.setText(user.getEmail());
+//            textView.setText(user.getEmail());
             
         } catch (IOException e) {
             e.printStackTrace();
