@@ -1,16 +1,14 @@
 package com.lukmo.kamsos.Networking;
 
-import android.text.TextUtils;
-import android.util.Log;
+import android.util.Base64;
 
 import com.lukmo.kamsos.Utils.Constants;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
 public class ServiceGenerator {
@@ -25,32 +23,27 @@ public class ServiceGenerator {
                 .create(UserService.class);
     }
 
-    private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    public static UserService getUser(String email, String password){
+        String credentials = email + ":" + password;
+        String basic = "Basic " + Base64.encodeToString(credentials.getBytes(),Base64.NO_WRAP);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
+        httpClient.addInterceptor(chain -> {
+            Request original = chain.request();
+            Request.Builder builder = original.newBuilder()
+                    .addHeader("Authorization", basic)
+                    .method(original.method(), original.body())
+            return chain.proceed(builder.build());
+        });
 
-    private static Retrofit.Builder builder = new Retrofit.Builder().
-            baseUrl(API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create());
+        RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
 
-    private static Retrofit retrofit = builder.build();
-
-    public static <S> S createService(Class<S> serviceClass){
-        return createService(serviceClass, null, null, null);
-    }
-
-    public static <S> S createService(
-            Class<S> serviceClass, final String email, final String password, final String authToken){
-        if (!TextUtils.isEmpty(authToken)){
-            AuthentificationInterceptor interceptor = new AuthentificationInterceptor(authToken);
-
-            if (!httpClient.interceptors().contains(interceptor)){
-                httpClient.addInterceptor(interceptor);
-
-                builder.client(httpClient.build());
-                retrofit = builder.build();
-            }
-        }
-
-        return retrofit.create(serviceClass);
+        return new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL)
+                .client(httpClient.build())
+                .addCallAdapterFactory(rxAdapter)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(UserService.class);
     }
 }
