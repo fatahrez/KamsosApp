@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context=".ProfileActivity">
+    tools:context=".UserInterface.ProfileActivity">
 
     <ProgressBar
         android:id="@+id/progress"

@@ -1,7 +1,9 @@
-package com.lukmo.kamsos;
+package com.lukmo.kamsos.UserInterface;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.lukmo.kamsos.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
