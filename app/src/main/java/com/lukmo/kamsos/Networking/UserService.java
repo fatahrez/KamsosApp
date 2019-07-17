@@ -1,4 +1,4 @@
-package com.lukmo.kamsos;
+package com.lukmo.kamsos.Networking;
 
 import com.lukmo.kamsos.Models.User;
 

@@ -5,12 +5,11 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.lukmo.kamsos.Models.User;
 import com.lukmo.kamsos.Networking.ServiceGenerator;
 import com.lukmo.kamsos.R;
-import com.lukmo.kamsos.UserService;
+import com.lukmo.kamsos.Networking.UserService;
 
 import java.io.IOException;
 
