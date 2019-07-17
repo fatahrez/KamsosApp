@@ -1,5 +1,6 @@
 package com.lukmo.kamsos.UserInterface;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,11 +14,25 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.lukmo.kamsos.Models.Response;
+import com.lukmo.kamsos.Networking.ServiceGenerator;
 import com.lukmo.kamsos.R;
+import com.lukmo.kamsos.Utils.Constants;
 
+import java.io.IOException;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.HttpException;
 
+
+import static com.lukmo.kamsos.Utils.Validation.validateFields;
+import static com.lukmo.kamsos.Utils.Validation.validateEmail;
 
 public class LoginFragment extends Fragment {
     public static final String TAG = LoginFragment.class.getSimpleName();
@@ -83,9 +98,86 @@ public class LoginFragment extends Fragment {
     }
 
     private void login() {
-//        setError();
+        setError();
 
-//        String
+        String email = mEditTextEmail.getText().toString();
+        String password = mEditTextPassword.getText().toString();
+
+        int err = 0;
+
+        if (!validateEmail(email)){
+            err++;
+            mTextInputEmail.setError("Email should be valid!");
+        }
+
+        if (!validateFields(password)){
+            err++;
+            mTextInputPassword.setError("Password should not be empty!");
+        }
+
+        if (err == 0){
+            loginProcess(email,password);
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            showSnackBarMessage("Enter Valid Details");
+        }
+    }
+
+    private void setError(){
+        mTextInputEmail.setError(null);
+        mTextInputPassword.setError(null);
+    }
+
+    private void loginProcess(String email, String password) {
+        mSubscription.add(ServiceGenerator.getUser(email,password).login()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(this::handleResponse, this::handleError));
+    }
+
+    private void handleResponse(Response response){
+        mProgressBar.setVisibility(View.GONE);
+
+        SharedPreferences.Editor editor = mSharedPreference.edit();
+        editor.putString(Constants.TOKEN, response.getToken());
+        editor.putString(Constants.EMAIL, response.getMessage());
+        editor.apply();
+
+        mEditTextEmail.setText(null);
+        mEditTextPassword.setText(null);
+
+        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void handleError(Throwable error) {
+        mProgressBar.setVisibility(View.GONE);
+
+        if (error instanceof HttpException){
+            Gson gson = new GsonBuilder().create();
+
+            try {
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        } else {
+            showSnackBarMessage("Network Error!");
+        }
+    }
+
+    private void showSnackBarMessage(String message){
+        if (getView() != null){
+            Snackbar.make(getView(),message,Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mSubscription.dispose();
     }
 
 }
