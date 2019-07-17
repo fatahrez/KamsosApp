@@ -49,6 +49,10 @@ public class RegisterFragment extends Fragment {
 
     private CompositeDisposable mSubscriptions;
 
+    public RegisterFragment() {
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
