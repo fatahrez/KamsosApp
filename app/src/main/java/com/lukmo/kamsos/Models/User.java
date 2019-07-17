@@ -15,7 +15,7 @@ public class User {
     @SerializedName("token")
     private String token;
 
-    public User (String username, String password, String email){
+    public User (){
         this.username = username;
         this.password = password;
         this.email = email;
