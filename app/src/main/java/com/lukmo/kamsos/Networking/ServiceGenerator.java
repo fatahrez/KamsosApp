@@ -65,5 +65,6 @@ public class ServiceGenerator {
                 .addCallAdapterFactory(rxAdapter)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(UserService.class);
+
     }
 }
