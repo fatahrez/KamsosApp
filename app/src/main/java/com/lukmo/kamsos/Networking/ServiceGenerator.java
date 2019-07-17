@@ -3,24 +3,27 @@ package com.lukmo.kamsos.Networking;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.lukmo.kamsos.Utils.Constants;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Scheduler;
+import rx.schedulers.Schedulers;
 
 public class ServiceGenerator {
-    public static final String API_BASE_URL = "http://kamsos.herokuapp.com/api/v1/";
+    public static UserService getUser(){
+        RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
 
-//    private OkHttpClient httpClient(){
-//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//
-//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//        return  new OkHttpClient().newBuilder()
-//                .addInterceptor(logging)
-//                .build();
-//
-//    }
+        return new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL)
+                .addCallAdapterFactory(rxAdapter)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(UserService.class);
+    }
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

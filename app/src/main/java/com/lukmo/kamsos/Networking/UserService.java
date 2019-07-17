@@ -10,7 +10,7 @@ import rx.Observable;
 
 public interface UserService {
     @POST("/auth/createpastoralist")
-    Observable<Response> register(@Body User user)
+    Observable<Response> register(@Body User user);
 
     @POST("/auth/login")
     Observable<Response> login();
