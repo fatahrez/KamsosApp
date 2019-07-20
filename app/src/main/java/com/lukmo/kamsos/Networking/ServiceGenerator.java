@@ -25,7 +25,7 @@ public class ServiceGenerator {
 
     public static UserService getUser(String email, String password){
         String credentials = email + ":" + password;
-        String basic = "Basic " + Base64.encodeToString(credentials.getBytes(),Base64.NO_WRAP);
+        String basic = "Bearer " + Base64.encodeToString(credentials.getBytes(),Base64.NO_WRAP);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
         httpClient.addInterceptor(chain -> {
