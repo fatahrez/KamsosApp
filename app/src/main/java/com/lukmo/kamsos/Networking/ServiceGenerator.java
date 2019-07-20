@@ -40,7 +40,6 @@ public class ServiceGenerator {
             Request.Builder builder = original.newBuilder()
 //                    .addHeader("Authorization", basic)
                     .addHeader("Accept", "application/json")
-//                    .setBody$okhttp()
                     .post(body)
                     .method(original.method(), original.body());
             return chain.proceed(builder.build());
