@@ -32,6 +32,7 @@ public class ServiceGenerator {
             Request original = chain.request();
             Request.Builder builder = original.newBuilder()
                     .addHeader("Authorization", basic)
+                    .addHeader("Accept", "application/json")
                     .method(original.method(), original.body());
             return chain.proceed(builder.build());
         });
