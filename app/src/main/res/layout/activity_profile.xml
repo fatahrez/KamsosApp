@@ -65,16 +65,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/card"
             android:layout_marginTop="24dp"
-            android:paddingLeft="48dp"
-            android:text="Change Password" />
+            android:gravity="center"
+            android:text="Change Password"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            />
 
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_below="@+id/btn_change_password"
             android:layout_marginTop="24dp"
-            android:paddingLeft="48dp"
+            android:gravity="center"
             android:text="Logout" />
 
 
