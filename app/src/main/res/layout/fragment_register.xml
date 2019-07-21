@@ -5,15 +5,34 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:padding="20dp"
+        >
 
-        <RelativeLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity=""
+            android:text="Sign Up"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#3FE0D0"
+            />
+
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinput_name"
@@ -26,7 +45,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Username"
-                    android:inputType="text" />
+                    android:drawableEnd="@drawable/ic_person"
+                    android:inputType="text"
+                    android:drawableRight="@drawable/ic_person" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -34,7 +55,6 @@
                 android:id="@+id/textinput_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textinput_name"
                 android:layout_marginTop="24dp">
 
                 <EditText
@@ -42,7 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    android:inputType="textEmailAddress" />
+                    android:drawableEnd="@drawable/ic_email"
+                    android:inputType="textEmailAddress"
+                    android:drawableRight="@drawable/ic_email" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,10 +72,9 @@
                 android:id="@+id/textinput_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textinput_email"
                 android:layout_marginTop="24dp"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@android:color/white">
+                app:passwordToggleTint="#000">
 
                 <EditText
                     android:id="@+id/edittext_password"
@@ -68,10 +89,9 @@
                 android:id="@+id/textinput_confirmpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textinput_password"
                 android:layout_marginTop="24dp"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@android:color/white">
+                app:passwordToggleTint="#000">
 
                 <EditText
                     android:id="@+id/edittext_confirmpassword"
@@ -86,31 +106,30 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textinput_confirmpassword"
                 android:layout_marginTop="24dp"
-                android:paddingLeft="48dp"
-                android:text="Register" />
+                android:text="Register"
+                android:background="@drawable/buttonsstyle"
+                />
 
             <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_register"
                 android:padding="24dp"
-                android:text="Already Registered? Login"
+                android:text="@string/Login"
                 android:textAlignment="center"/>
 
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_login"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="24dp"
                 android:visibility="gone"/>
 
-        </RelativeLayout>
+
 
     </LinearLayout>
+</RelativeLayout>
 
 </ScrollView>
