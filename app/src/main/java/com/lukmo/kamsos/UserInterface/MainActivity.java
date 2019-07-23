@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.lukmo.kamsos.Models.User;
+import com.lukmo.kamsos.Presenters.UserPresenter;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.UserInfrastructure.UserInfrastructure;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
+    public UserInfrastructure.Presenter mPresenter;
     private LoginFragment mLoginFragment;
 
     @Override
@@ -22,12 +24,8 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mLoginFragment = new LoginFragment();
-
-        if (savedInstanceState == null){
-            loadFragment();
-        }
-
+        mPresenter = new UserPresenter(this);
+        mPresenter.start();
 
     }
 
@@ -40,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
 
     @Override
     public void init() {
-
+        mLoginFragment = new LoginFragment();
+            loadFragment();
     }
 
     @Override
