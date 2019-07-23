@@ -86,7 +86,7 @@ public class ServiceGenerator {
             if (gson == null) {
                 gson = new GsonBuilder().setLenient().create();
             }
-            retrofit new Retrofit.Builder()
+            retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .client(httpClient.build())
                     .addCallAdapterFactory(rxAdapter)
