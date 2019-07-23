@@ -14,7 +14,7 @@ public interface UserInfrastructure {
     }
 
     interface Presenter {
-        void start;
+        void start();
 
         void loadUsers();
     }

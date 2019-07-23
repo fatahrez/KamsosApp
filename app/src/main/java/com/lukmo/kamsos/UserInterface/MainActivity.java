@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.lukmo.kamsos.Models.User;
 import com.lukmo.kamsos.R;
+import com.lukmo.kamsos.UserInfrastructure.UserInfrastructure;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements UserInfrastructure.View {
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -21,14 +25,31 @@ public class MainActivity extends AppCompatActivity {
         mLoginFragment = new LoginFragment();
 
         if (savedInstanceState == null){
-            loadFrament();
+            loadFragment();
         }
+
+
     }
 
-    private void loadFrament() {
+    private void loadFragment() {
         if (mLoginFragment==null){
             mLoginFragment = new LoginFragment();
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, mLoginFragment, LoginFragment.TAG).commit();
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void loadDataInList(List<User> users) {
+
     }
 }
