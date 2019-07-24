@@ -123,13 +123,13 @@ public class RegisterFragment extends Fragment {
 
 
         if (err == 0){
-            User user = new User();
-            user.setEmail(email);
-            user.setUsername(name);
-            user.setPassword(password);
+//            User user = new User();
+//            user.getUser().setEmail(email);
+//            user.getUser().setUsername(name);
+//            user.setPassword(password);
 
-            mProgressBar.setVisibility(View.VISIBLE);
-            registerProcess(user);
+//            mProgressBar.setVisibility(View.VISIBLE);
+//            registerProcess(user);
         } else {
             showSnackBarMessage("Enter Valid Details!");
         }
@@ -143,34 +143,9 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registerProcess(User user){
-        mSubscriptions.add(ServiceGenerator.getUser().register(user)
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-        .subscribe(this::handleResponse, this::handleError));
+
     }
 
-    private void handleResponse(Response response){
-        mProgressBar.setVisibility(View.GONE);
-        showSnackBarMessage(response.getMessage());
-    }
-
-    private void handleError(Throwable error) {
-        mProgressBar.setVisibility(View.GONE);
-
-        if (error instanceof HttpException) {
-            Gson gson = new GsonBuilder().create();
-
-            try {
-                String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody, Response.class);
-                showSnackBarMessage(response.getMessage());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            showSnackBarMessage("Network Error!");
-        }
-    }
 
     private void showSnackBarMessage(String message){
         if (getView() != null){

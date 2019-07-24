@@ -1,55 +1,26 @@
 package com.lukmo.kamsos.Models;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class User {
 
-    @SerializedName("username")
-    private String username;
+    @SerializedName("user")
+    @Expose
+    private User_ user;
 
-    @SerializedName("email")
-    private String email;
-
-    @SerializedName("password")
-    private String password;
-    @SerializedName("token")
-    private String token;
-
-    public User (){
-        this.username = username;
-        this.password = password;
-        this.email = email;
+    public User_ getUser() {
+        return user;
     }
 
-    public String getUsername() {
-        return username;
+    public void setUser(User_ user) {
+        this.user = user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("user", user).toString();
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

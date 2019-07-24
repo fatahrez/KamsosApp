@@ -6,7 +6,7 @@ import com.lukmo.kamsos.Networking.NetworkUtils;
 
 public class UserTask {
     public static void postData(final Callback<User> callback){
-        NetworkUtils.ApiInstance()
+//        NetworkUtils.ApiInstance()
 
     }
 }
