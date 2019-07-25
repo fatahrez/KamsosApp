@@ -19,7 +19,10 @@ import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.*;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.lukmo.kamsos.Utils.Validation.validateEmail;
 import static com.lukmo.kamsos.Utils.Validation.validateFields;
@@ -138,7 +141,30 @@ public class RegisterFragment extends Fragment {
     }
 
     private void registerProcess(Register register){
-        mUserService.register(register)
+        mUserService.register("application/json",register)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Register>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Register register) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                })
     }
 
 
