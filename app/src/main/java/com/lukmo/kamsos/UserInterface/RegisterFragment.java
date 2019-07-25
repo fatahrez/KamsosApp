@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lukmo.kamsos.Models.Login.User;
+import com.lukmo.kamsos.Models.Register.Register;
+import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 
 import io.reactivex.disposables.*;
@@ -39,6 +41,8 @@ public class RegisterFragment extends Fragment {
     private ProgressBar mProgressBar;
 
     private CompositeDisposable mSubscriptions;
+
+    private UserService mUserService;
 
     public RegisterFragment() {
 
@@ -114,13 +118,13 @@ public class RegisterFragment extends Fragment {
 
 
         if (err == 0){
-//            User user = new User();
-//            user.getUser().setEmail(email);
-//            user.getUser().setUsername(name);
-//            user.setPassword(password);
+            Register register = new Register();
+            register.getUser().setEmail(email);
+            register.getUser().setUsername(name);
+            register.getUser().setPassword(password);
 
-//            mProgressBar.setVisibility(View.VISIBLE);
-//            registerProcess(user);
+            mProgressBar.setVisibility(View.VISIBLE);
+            registerProcess(register);
         } else {
             showSnackBarMessage("Enter Valid Details!");
         }
@@ -133,8 +137,8 @@ public class RegisterFragment extends Fragment {
         mTextInputConfirmPassword.setError(null);
     }
 
-    private void registerProcess(User user){
-
+    private void registerProcess(Register register){
+        mUserService.register(register)
     }
 
 
