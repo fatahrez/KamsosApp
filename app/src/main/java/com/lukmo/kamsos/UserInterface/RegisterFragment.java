@@ -14,18 +14,9 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.lukmo.kamsos.Models.Response;
-import com.lukmo.kamsos.Models.User;
-import com.lukmo.kamsos.Networking.ServiceGenerator;
+import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.R;
 
-import java.io.IOException;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import retrofit2.HttpException;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.disposables.*;
 
 import static com.lukmo.kamsos.Utils.Validation.validateEmail;

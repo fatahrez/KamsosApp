@@ -1,6 +1,6 @@
 package com.lukmo.kamsos.Networking;
 
-import com.lukmo.kamsos.Models.User;
+import com.lukmo.kamsos.Models.Login.User;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

@@ -1,4 +1,4 @@
-package com.lukmo.kamsos.Models;
+package com.lukmo.kamsos.Models.Login;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
