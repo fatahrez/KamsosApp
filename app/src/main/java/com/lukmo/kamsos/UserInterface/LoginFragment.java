@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +21,20 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lukmo.kamsos.Models.Response;
+import com.lukmo.kamsos.Models.User;
+import com.lukmo.kamsos.Models.User_;
+import com.lukmo.kamsos.Networking.NetworkUtils;
 import com.lukmo.kamsos.Networking.ServiceGenerator;
+import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
 import java.io.IOException;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
 
@@ -42,12 +50,14 @@ public class LoginFragment extends Fragment {
     private Button mBtnLogin;
     private TextView mTvRegister;
     private TextView mTvForgotPassword;
+    private TextView mResponseTv;
     private TextInputLayout mTextInputEmail;
     private TextInputLayout mTextInputPassword;
     private ProgressBar mProgressBar;
 
     private CompositeDisposable mSubscription;
     private SharedPreferences mSharedPreference;
+    private UserService mUserService;
 
     public LoginFragment() {
 
@@ -80,6 +90,9 @@ public class LoginFragment extends Fragment {
 
         mTvRegister = (TextView) v.findViewById(R.id.tv_register);
         mTvForgotPassword = (TextView) v.findViewById(R.id.tv_forgot_password);
+        mResponseTv = (TextView) v.findViewById(R.id.tv_response);
+
+        mUserService = NetworkUtils.ApiInstance();
 
         mBtnLogin.setOnClickListener(view -> login());
         mTvRegister.setOnClickListener(view -> goToRegister());
@@ -129,43 +142,44 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginProcess(String email, String password) {
-        mSubscription.add(ServiceGenerator.getUser(email,password).login()
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeOn(Schedulers.io())
-        .subscribe(this::handleResponse, this::handleError));
+        User user = new User();
+        User_ user_ = new User_();
+        user_.setEmail(email);
+        user_.setPassword(password);
+        user.setUser(user_);
+        mUserService.login("application/json", user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<User>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(User user) {
+                        showResponse(user.toString());
+                        Log.i(TAG, "Response: "+ user);
+                        mProgressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
-    private void handleResponse(Response response){
-        mProgressBar.setVisibility(View.GONE);
-
-        SharedPreferences.Editor editor = mSharedPreference.edit();
-        editor.putString(Constants.TOKEN, response.getToken());
-        editor.putString(Constants.EMAIL, response.getMessage());
-        editor.apply();
-
-        mEditTextEmail.setText(null);
-        mEditTextPassword.setText(null);
-
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        startActivity(intent);
-    }
-
-    private void handleError(Throwable error) {
-        mProgressBar.setVisibility(View.GONE);
-
-        if (error instanceof HttpException){
-            Gson gson = new GsonBuilder().create();
-
-            try {
-                String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
-                showSnackBarMessage(response.getMessage());
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        } else {
-            showSnackBarMessage("Network Error!");
+    private void showResponse(String toString) {
+        if (mResponseTv.getVisibility() == View.GONE){
+            mResponseTv.setVisibility(View.VISIBLE);
         }
+        mResponseTv.setText(toString);
     }
 
     private void showSnackBarMessage(String message){
