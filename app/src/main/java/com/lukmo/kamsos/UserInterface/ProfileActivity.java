@@ -2,6 +2,7 @@ package com.lukmo.kamsos.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initViews();
+        initSharedPreferences();
     }
 
     private void initViews() {
@@ -40,6 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
         editor.putString(Constants.TOKEN, "");
         editor.putString(Constants.EMAIL, "");
         editor.apply();
+
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        startActivity(intent);
+
         finish();
     }
 
@@ -48,5 +54,10 @@ public class ProfileActivity extends AppCompatActivity {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mToken = mSharedPreferences.getString(Constants.TOKEN,"");
         mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

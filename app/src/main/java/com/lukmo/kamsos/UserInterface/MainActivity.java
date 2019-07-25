@@ -50,4 +50,9 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
     public void loadDataInList(List<User> users) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
