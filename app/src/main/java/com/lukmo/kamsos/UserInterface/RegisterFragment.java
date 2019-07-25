@@ -88,7 +88,7 @@ public class RegisterFragment extends Fragment {
 
     private void register() {
 
-//        setError();
+        setError();
 
         String name = mEditTextName.getText().toString();
         String email = mEditTextEmail.getText().toString().trim();
