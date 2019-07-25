@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Models.Register.Register_;
+import com.lukmo.kamsos.Networking.NetworkUtils;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 
@@ -79,6 +80,7 @@ public class RegisterFragment extends Fragment {
 
         mProgressBar = (ProgressBar) v.findViewById(R.id.progress);
 
+        mUserService = NetworkUtils.ApiInstance();
 
         mTvLogin.setOnClickListener(view -> goToLogin());
         mBtnRegister.setOnClickListener(view -> register());
