@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.lukmo.kamsos.Models.Login.LoginResponse;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Login.User_;
 import com.lukmo.kamsos.Networking.NetworkUtils;
