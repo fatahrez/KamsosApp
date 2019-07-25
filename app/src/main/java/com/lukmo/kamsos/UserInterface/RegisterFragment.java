@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
+import com.lukmo.kamsos.Models.Register.Register_;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 
@@ -85,10 +86,10 @@ public class RegisterFragment extends Fragment {
 
     private void register() {
 
-        setError();
+//        setError();
 
         String name = mEditTextName.getText().toString();
-        String email = mEditTextEmail.getText().toString();
+        String email = mEditTextEmail.getText().toString().trim();
         String password = mEditTextPassword.getText().toString();
         String confirmPassword = mEditTextConfirmPassword.getText().toString();
 
@@ -121,13 +122,8 @@ public class RegisterFragment extends Fragment {
 
 
         if (err == 0){
-            Register register = new Register();
-            register.getUser().setEmail(email);
-            register.getUser().setUsername(name);
-            register.getUser().setPassword(password);
-
             mProgressBar.setVisibility(View.VISIBLE);
-            registerProcess(register);
+            registerProcess(email, name, password);
         } else {
             showSnackBarMessage("Enter Valid Details!");
         }
@@ -140,7 +136,14 @@ public class RegisterFragment extends Fragment {
         mTextInputConfirmPassword.setError(null);
     }
 
-    private void registerProcess(Register register){
+    private void registerProcess(String email, String name, String password){
+        Register register = new Register();
+        Register_ register_ = new Register_();
+        register_.setEmail(email);
+        register_.setUsername(name);
+        register_.setPassword(password);
+        register.setUser(register_);
+
         mUserService.register("application/json",register)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -152,7 +155,8 @@ public class RegisterFragment extends Fragment {
 
                     @Override
                     public void onNext(Register register) {
-
+                        showSnackBarMessage("User created successfully");
+                        goToLogin();
                     }
 
                     @Override
@@ -164,7 +168,7 @@ public class RegisterFragment extends Fragment {
                     public void onComplete() {
 
                     }
-                })
+                });
     }
 
 

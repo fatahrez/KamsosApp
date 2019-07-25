@@ -16,7 +16,7 @@ public interface UserService {
     @Headers("X-Requested-With:XMLHttpRequest")
     Observable<Register> register(
         @Header("Content-Type") String content_type,
-        @Body Register register;
+        @Body Register register
     );
 
     @POST("auth/login")
