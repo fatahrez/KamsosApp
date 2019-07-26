@@ -2,10 +2,9 @@ package com.lukmo.kamsos.UserInterface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.lukmo.kamsos.Models.User;
+import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Presenters.UserPresenter;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.UserInfrastructure.UserInfrastructure;
@@ -50,5 +49,10 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
     @Override
     public void loadDataInList(List<User> users) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

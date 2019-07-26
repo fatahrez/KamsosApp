@@ -1,20 +1,21 @@
-package com.lukmo.kamsos.Models;
+package com.lukmo.kamsos.Models.Register;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class User {
+public class Register {
 
     @SerializedName("user")
     @Expose
-    private User_ user;
+    private Register_ user;
 
-    public User_ getUser() {
+    public Register_ getUser() {
         return user;
     }
 
-    public void setUser(User_ user) {
+    public void setUser(Register_ user) {
         this.user = user;
     }
 
@@ -24,3 +25,4 @@ public class User {
     }
 
 }
+

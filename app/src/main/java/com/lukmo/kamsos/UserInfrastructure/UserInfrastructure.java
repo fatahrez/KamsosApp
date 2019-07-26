@@ -1,6 +1,6 @@
 package com.lukmo.kamsos.UserInfrastructure;
 
-import com.lukmo.kamsos.Models.User;
+import com.lukmo.kamsos.Models.Login.User;
 
 import java.util.List;
 

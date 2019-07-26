@@ -18,25 +18,19 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.lukmo.kamsos.Models.Response;
-import com.lukmo.kamsos.Models.User;
-import com.lukmo.kamsos.Models.User_;
+import com.lukmo.kamsos.Models.Login.User;
+import com.lukmo.kamsos.Models.Login.User_;
 import com.lukmo.kamsos.Networking.NetworkUtils;
-import com.lukmo.kamsos.Networking.ServiceGenerator;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
-
-import java.io.IOException;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.HttpException;
+import okhttp3.Response;
 
 
 import static com.lukmo.kamsos.Utils.Validation.validateFields;
@@ -161,6 +155,9 @@ public class LoginFragment extends Fragment {
                         showResponse(user.toString());
                         Log.i(TAG, "Response: "+ user);
                         mProgressBar.setVisibility(View.GONE);
+                        String token = user.getUser().getToken();
+                        Log.i(TAG, "Response: " + token);
+                        handleResponse(token);
                     }
 
                     @Override
@@ -173,6 +170,19 @@ public class LoginFragment extends Fragment {
 
                     }
                 });
+    }
+
+    private void handleResponse(String response) {
+        SharedPreferences.Editor editor = mSharedPreference.edit();
+        editor.putString(Constants.TOKEN, response);
+        editor.putString(Constants.EMAIL, response);
+        editor.apply();
+
+        mEditTextEmail.setText(null);
+        mEditTextPassword.setText(null);
+
+        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        startActivity(intent);
     }
 
     private void showResponse(String toString) {

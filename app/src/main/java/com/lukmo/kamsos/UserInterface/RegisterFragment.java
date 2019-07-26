@@ -14,19 +14,17 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.lukmo.kamsos.Models.Response;
-import com.lukmo.kamsos.Models.User;
-import com.lukmo.kamsos.Networking.ServiceGenerator;
+import com.lukmo.kamsos.Models.Login.User;
+import com.lukmo.kamsos.Models.Register.Register;
+import com.lukmo.kamsos.Models.Register.Register_;
+import com.lukmo.kamsos.Networking.NetworkUtils;
+import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 
-import java.io.IOException;
-
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import retrofit2.HttpException;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.disposables.*;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.lukmo.kamsos.Utils.Validation.validateEmail;
 import static com.lukmo.kamsos.Utils.Validation.validateFields;
@@ -48,6 +46,8 @@ public class RegisterFragment extends Fragment {
     private ProgressBar mProgressBar;
 
     private CompositeDisposable mSubscriptions;
+
+    private UserService mUserService;
 
     public RegisterFragment() {
 
@@ -80,6 +80,7 @@ public class RegisterFragment extends Fragment {
 
         mProgressBar = (ProgressBar) v.findViewById(R.id.progress);
 
+        mUserService = NetworkUtils.ApiInstance();
 
         mTvLogin.setOnClickListener(view -> goToLogin());
         mBtnRegister.setOnClickListener(view -> register());
@@ -90,7 +91,7 @@ public class RegisterFragment extends Fragment {
         setError();
 
         String name = mEditTextName.getText().toString();
-        String email = mEditTextEmail.getText().toString();
+        String email = mEditTextEmail.getText().toString().trim();
         String password = mEditTextPassword.getText().toString();
         String confirmPassword = mEditTextConfirmPassword.getText().toString();
 
@@ -123,13 +124,8 @@ public class RegisterFragment extends Fragment {
 
 
         if (err == 0){
-//            User user = new User();
-//            user.getUser().setEmail(email);
-//            user.getUser().setUsername(name);
-//            user.setPassword(password);
-
-//            mProgressBar.setVisibility(View.VISIBLE);
-//            registerProcess(user);
+            mProgressBar.setVisibility(View.VISIBLE);
+            registerProcess(email, name, password);
         } else {
             showSnackBarMessage("Enter Valid Details!");
         }
@@ -142,8 +138,39 @@ public class RegisterFragment extends Fragment {
         mTextInputConfirmPassword.setError(null);
     }
 
-    private void registerProcess(User user){
+    private void registerProcess(String email, String name, String password){
+        Register register = new Register();
+        Register_ register_ = new Register_();
+        register_.setEmail(email);
+        register_.setUsername(name);
+        register_.setPassword(password);
+        register.setUser(register_);
 
+        mUserService.register("application/json",register)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Register>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Register register) {
+                        showSnackBarMessage("User created successfully");
+                        goToLogin();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 
