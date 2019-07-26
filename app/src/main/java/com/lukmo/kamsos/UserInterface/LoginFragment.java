@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,10 +40,13 @@ import static com.lukmo.kamsos.Utils.Validation.validateEmail;
 public class LoginFragment extends Fragment {
     public static final String TAG = LoginFragment.class.getSimpleName();
 
+
+    private static View view;
+
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
     private Button mBtnLogin;
-    private TextView mTvRegister;
+    private LinearLayout mTvRegister;
     private TextView mTvForgotPassword;
     private TextView mResponseTv;
     private TextInputLayout mTextInputEmail;
@@ -60,7 +64,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the cursor_drawable for this fragment
         View view= inflater.inflate(R.layout.fragment_login, container, false);
         mSubscription = new CompositeDisposable();
         initViews(view);
@@ -82,7 +86,7 @@ public class LoginFragment extends Fragment {
 
         mProgressBar = (ProgressBar) v.findViewById(R.id.progress);
 
-        mTvRegister = (TextView) v.findViewById(R.id.tv_register);
+        mTvRegister = (LinearLayout) v.findViewById(R.id.tv_register);
         mTvForgotPassword = (TextView) v.findViewById(R.id.tv_forgot_password);
         mResponseTv = (TextView) v.findViewById(R.id.tv_response);
 
@@ -112,22 +116,38 @@ public class LoginFragment extends Fragment {
 
         int err = 0;
 
-        if (!validateEmail(email)){
-            err++;
-            mTextInputEmail.setError("Email should be valid!");
-        }
+        if ( !validateEmail(email) && !validateFields(password)){
+            new CustomToast().Show_Toast(getContext(), view,
+                  "Enter Valid Details");
 
-        if (!validateFields(password)){
+        } else if (!validateEmail(email)){
             err++;
-            mTextInputPassword.setError("Password should not be empty!");
-        }
+            new CustomToast().Show_Toast(getContext(), view,
+                    "Your Email Id is Invalid.");
 
-        if (err == 0){
+        }  else if (!validateFields(password)){
+            err++;
+            new CustomToast().Show_Toast(getContext(), view,
+                    "Enter Password !");
+        } else {
             loginProcess(email,password);
             mProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            showSnackBarMessage("Enter Valid Details");
         }
+
+//        if (!validateEmail(email)){
+//            err++;
+//            new CustomToast().Show_Toast(getContext(), view,
+//                    "Your Email Id is Invalid.");
+//
+//        }
+
+//        if (!validateFields(password)){
+//            err++;
+//            new CustomToast().Show_Toast(getContext(), view,
+//                    "Password should not be empty!");
+//        }
+
+
     }
 
     private void setError(){
@@ -197,6 +217,7 @@ public class LoginFragment extends Fragment {
             Snackbar.make(getView(),message,Snackbar.LENGTH_SHORT).show();
         }
     }
+
 
     @Override
     public void onDestroy(){
