@@ -54,4 +54,7 @@ dependencies {
 
     //ToStringBuilder
     implementation 'org.apache.commons:commons-lang3:3.6'
+
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
 }
