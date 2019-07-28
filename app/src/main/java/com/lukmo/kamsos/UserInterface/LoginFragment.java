@@ -201,7 +201,7 @@ public class LoginFragment extends Fragment {
         mEditTextEmail.setText(null);
         mEditTextPassword.setText(null);
 
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        Intent intent = new Intent(getActivity(), Main2Activity.class);
         startActivity(intent);
     }
 
