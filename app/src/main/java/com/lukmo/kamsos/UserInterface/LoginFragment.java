@@ -99,6 +99,8 @@ public class LoginFragment extends Fragment {
 
     private void showDialog() {
 
+
+
     }
 
     private void goToRegister() {
@@ -116,14 +118,14 @@ public class LoginFragment extends Fragment {
 
         int err = 0;
 
-        if ( !validateEmail(email) && !validateFields(password)){
+        if ( !validateEmail(email) || !validateFields(password)){
             new CustomToast().Show_Toast(getContext(), view,
                   "Enter Valid Details");
 
         } else if (!validateEmail(email)){
             err++;
             new CustomToast().Show_Toast(getContext(), view,
-                    "Your Email Id is Invalid.");
+                    "Your Email is Invalid.");
 
         }  else if (!validateFields(password)){
             err++;
@@ -149,6 +151,7 @@ public class LoginFragment extends Fragment {
 
 
     }
+
 
     private void setError(){
         mTextInputEmail.setError(null);
