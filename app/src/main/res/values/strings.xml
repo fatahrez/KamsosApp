@@ -7,5 +7,6 @@
     <string name="Acc">Sign Up</string>
     <string name="Login">Already Registered?</string>
     <string name="invalid">Invalid Credentials</string>
+    <string name="Change">Change Password</string>
 
 </resources>
