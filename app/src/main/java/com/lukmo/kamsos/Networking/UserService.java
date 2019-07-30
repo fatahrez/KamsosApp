@@ -2,11 +2,13 @@ package com.lukmo.kamsos.Networking;
 
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
+import com.lukmo.kamsos.Models.Vet.Vet;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -24,5 +26,11 @@ public interface UserService {
     Observable<User> login(
             @Header("Content-Type") String content_type,
             @Body User user
+    );
+
+    @GET("/vets")
+    Observable<Vet> getVets(
+            @Header("Content-Type") String content_type,
+            @Body Vet vet
     );
 }

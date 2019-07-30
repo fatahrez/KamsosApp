@@ -9,8 +9,7 @@
     <string name="invalid">Invalid Credentials</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Vets</string>
+    <string name="title_notifications">Agrovets</string>
     <string name="Change">Change Password</string>
-
 </resources>
