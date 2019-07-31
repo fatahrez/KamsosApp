@@ -11,5 +11,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Vets</string>
     <string name="title_notifications">Agrovets</string>
+    <string name="title_account">Account</string>
     <string name="Change">Change Password</string>
 </resources>

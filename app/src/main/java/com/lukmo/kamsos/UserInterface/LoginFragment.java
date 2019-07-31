@@ -19,12 +19,17 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.lukmo.kamsos.Callback.Callback;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Login.User_;
+import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.Networking.NetworkUtils;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
+import com.lukmo.kamsos.Utils.UserTask;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -69,6 +74,7 @@ public class LoginFragment extends Fragment {
         mSubscription = new CompositeDisposable();
         initViews(view);
         initSharedPreferences();
+
         return view;
     }
 
@@ -134,6 +140,28 @@ public class LoginFragment extends Fragment {
         } else {
             loginProcess(email,password);
             mProgressBar.setVisibility(View.VISIBLE);
+
+            mUserService.getVets().subscribeOn(Schedulers.io()).subscribe(new Observer<List<Vet>>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(List<Vet> vets) {
+                    Log.i(TAG , "Vet response: " + vets.get(1).toString());
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
         }
 
 //        if (!validateEmail(email)){

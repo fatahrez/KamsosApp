@@ -4,6 +4,8 @@ import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Models.Vet.Vet;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -29,8 +31,5 @@ public interface UserService {
     );
 
     @GET("/vets")
-    Observable<Vet> getVets(
-            @Header("Content-Type") String content_type,
-            @Body Vet vet
-    );
+    Observable<List<Vet>> getVets();
 }

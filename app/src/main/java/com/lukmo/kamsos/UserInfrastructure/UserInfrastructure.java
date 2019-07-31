@@ -1,6 +1,7 @@
 package com.lukmo.kamsos.UserInfrastructure;
 
 import com.lukmo.kamsos.Models.Login.User;
+import com.lukmo.kamsos.Models.Vet.Vet;
 
 import java.util.List;
 
@@ -10,13 +11,13 @@ public interface UserInfrastructure {
 
         void showError(String message);
 
-        void loadDataInList(List<User> users);
+        void loadDataInList(List<Vet> vets);
     }
 
     interface Presenter {
         void start();
 
-        void loadUsers();
+        void loadVets();
     }
 
 }
