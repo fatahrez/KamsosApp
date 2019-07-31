@@ -15,6 +15,6 @@ public class HomeActivity extends Main2Activity {
 
     @Override
     int getNavigationMenuItemId() {
-        return R.id.navigation;
+        return R.id.navigation_home;
     }
 }

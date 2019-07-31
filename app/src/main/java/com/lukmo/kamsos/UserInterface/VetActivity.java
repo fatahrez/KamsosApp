@@ -6,11 +6,15 @@ import android.os.Bundle;
 
 import com.lukmo.kamsos.R;
 
-public class VetActivity extends AppCompatActivity {
+public class VetActivity extends Main2Activity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vet);
+    int getContentViewId() {
+        return R.layout.activity_vet;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.navigation_vets;
     }
 }

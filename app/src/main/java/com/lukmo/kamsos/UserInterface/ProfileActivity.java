@@ -12,52 +12,61 @@ import android.widget.ProgressBar;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
-public class ProfileActivity extends AppCompatActivity {
-    private Button mBtLogout;
-
-    private ProgressBar mProgressbar;
-
-    private SharedPreferences mSharedPreferences;
-    private String mToken;
-    private String mEmail;
-
+public class ProfileActivity extends Main2Activity{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
-        initViews();
-        initSharedPreferences();
-    }
-
-    private void initViews() {
-        mBtLogout = (Button) findViewById(R.id.btn_logout);
-        mProgressbar = (ProgressBar) findViewById(R.id.progress);
-
-        mBtLogout.setOnClickListener(view -> logout());
-    }
-
-    private void logout() {
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString(Constants.TOKEN, "");
-        editor.putString(Constants.EMAIL, "");
-        editor.apply();
-
-        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-        startActivity(intent);
-
-        finish();
-    }
-
-    private void initSharedPreferences() {
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mToken = mSharedPreferences.getString(Constants.TOKEN,"");
-        mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
+    int getContentViewId() {
+        return R.layout.activity_profile;
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
+    int getNavigationMenuItemId() {
+        return R.id.navigation_account;
     }
+//    private Button mBtLogout;
+//
+//    private ProgressBar mProgressbar;
+//
+//    private SharedPreferences mSharedPreferences;
+//    private String mToken;
+//    private String mEmail;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_profile);
+//
+//        initViews();
+//        initSharedPreferences();
+//    }
+//
+//    private void initViews() {
+//        mBtLogout = (Button) findViewById(R.id.btn_logout);
+//        mProgressbar = (ProgressBar) findViewById(R.id.progress);
+//
+//        mBtLogout.setOnClickListener(view -> logout());
+//    }
+//
+//    private void logout() {
+//        SharedPreferences.Editor editor = mSharedPreferences.edit();
+//        editor.putString(Constants.TOKEN, "");
+//        editor.putString(Constants.EMAIL, "");
+//        editor.apply();
+//
+//        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+//        startActivity(intent);
+//
+//        finish();
+//    }
+//
+//    private void initSharedPreferences() {
+//
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mToken = mSharedPreferences.getString(Constants.TOKEN,"");
+//        mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//    }
 }
