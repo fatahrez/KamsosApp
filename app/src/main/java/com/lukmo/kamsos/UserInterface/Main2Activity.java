@@ -1,5 +1,6 @@
 package com.lukmo.kamsos.UserInterface;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,33 +19,36 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity implements UserInfrastructure.View {
+public class Main2Activity extends AppCompatActivity implements UserInfrastructure.View, BottomNavigationView.OnNavigationItemSelectedListener {
     private UserInfrastructure.Presenter mPresenter;
 
     private TextView mTextMessage;
+    protected BottomNavigationView navigationView;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-                case R.id.navigation_account:
-                    mTextMessage.setText(R.string.title_account);
-                    return true;
-            }
-            return false;
-        }
-    };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.navigation_home:
+//                    mTextMessage.setText(R.string.title_home);
+//                    return true;
+//                case R.id.navigation_dashboard:
+//                    mTextMessage.setText(R.string.title_dashboard);
+//                    return true;
+//                case R.id.navigation_notifications:
+//                    mTextMessage.setText(R.string.title_notifications);
+//                    return true;
+//                case R.id.navigation_account:
+//                    mTextMessage.setText(R.string.title_account);
+//                    Intent intent = new Intent(Main2Activity.this, ProfileActivity.class);
+//                    startActivity(intent);
+//                    return true;
+//            }
+//            return false;
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,8 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
         setContentView(R.layout.activity_main2);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(this);
         mPresenter = new UserPresenter(this);
         mPresenter.start();
     }
@@ -72,5 +76,15 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
     public void loadDataInList(List<Vet> vets) {
         Log.d("Vet Response " , vets.toString());
         mTextMessage.setText(vets.get(1).getEmail());
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        navigationView.postDelayed(() -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.navigation_home){
+                startActivity();
+            }
+        })
     }
 }
