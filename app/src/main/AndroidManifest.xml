@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_kamsos_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserInterface.HomeActivity"></activity>
+        <activity android:name=".UserInterface.VetActivity"></activity>
+        <activity android:name=".UserInterface.HomeActivity" />
         <activity
             android:name=".UserInterface.Main2Activity"
             android:label="@string/title_activity_main2" />

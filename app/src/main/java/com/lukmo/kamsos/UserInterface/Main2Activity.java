@@ -83,8 +83,12 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
         navigationView.postDelayed(() -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navigation_home){
-                startActivity();
+                startActivity(new Intent(this, HomeActivity.class));
+            } else if (itemId == R.id.navigation_vets){
+                startActivity(new Intent(this, VetActivity));
             }
-        })
+            finish();
+        }, 3000);
+        return true;
     }
 }
