@@ -14,12 +14,13 @@ import com.lukmo.kamsos.UserInfrastructure.UserInfrastructure;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity implements UserInfrastructure.View, BottomNavigationView.OnNavigationItemSelectedListener {
+public abstract class Main2Activity extends AppCompatActivity implements UserInfrastructure.View, BottomNavigationView.OnNavigationItemSelectedListener {
     private UserInfrastructure.Presenter mPresenter;
 
     private TextView mTextMessage;
@@ -53,7 +54,8 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+
+        setContentView(getContentViewId());
 
         mTextMessage = (TextView) findViewById(R.id.message);
         navigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -79,6 +81,13 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        updateNavigationBarState();
+    }
+
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         navigationView.postDelayed(() -> {
             int itemId = item.getItemId();
@@ -88,9 +97,32 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
                 startActivity(new Intent(this, VetActivity.class));
             } else if (itemId == R.id.navigation_agrovets){
                 startActivity(new Intent(this, AgrovetActivity.class));
+            } else if (itemId == R.id.navigation_account){
+                startActivity(new Intent(this, ProfileActivity.class));
             }
             finish();
         }, 3000);
         return true;
     }
+
+
+    private void updateNavigationBarState() {
+        int actionId = getNavigationMenuItemId();
+        selectBottomNavigationBarItem(actionId);
+    }
+
+    private void selectBottomNavigationBarItem(int actionId) {
+        Menu menu = navigationView.getMenu();
+        for (int i=0; i< menu.size(); i++){
+            MenuItem item = menu.getItem(i);
+            boolean shouldBeChecked = item.getItemId() == actionId;
+            if (shouldBeChecked){
+                item.setChecked(true);
+                break;
+            }
+        }
+    }
+
+    abstract int getContentViewId();
+    abstract int getNavigationMenuItemId();
 }

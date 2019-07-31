@@ -6,11 +6,15 @@ import android.os.Bundle;
 
 import com.lukmo.kamsos.R;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Main2Activity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    int getContentViewId() {
+        return R.layout.activity_home;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.navigation;
     }
 }
