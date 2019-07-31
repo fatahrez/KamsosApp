@@ -85,7 +85,9 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
             if (itemId == R.id.navigation_home){
                 startActivity(new Intent(this, HomeActivity.class));
             } else if (itemId == R.id.navigation_vets){
-                startActivity(new Intent(this, VetActivity));
+                startActivity(new Intent(this, VetActivity.class));
+            } else if (itemId == R.id.navigation_agrovets){
+                startActivity(new Intent(this, AgrovetActivity.class));
             }
             finish();
         }, 3000);
