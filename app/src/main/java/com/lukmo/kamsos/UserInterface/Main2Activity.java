@@ -38,7 +38,9 @@ public class Main2Activity extends AppCompatActivity implements UserInfrastructu
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
-
+                case R.id.navigation_account:
+                    mTextMessage.setText(R.string.title_account);
+                    return true;
             }
             return false;
         }

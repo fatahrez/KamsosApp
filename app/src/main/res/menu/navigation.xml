@@ -17,7 +17,7 @@
         android:title="@string/title_notifications" />
 
     <item
-        android:id="@+id/navigation_menu"
+        android:id="@+id/navigation_account"
         android:icon="@drawable/baseline_account_box_black_24dp"
         android:title="@string/title_account" />
 
