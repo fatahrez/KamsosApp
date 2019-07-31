@@ -232,7 +232,7 @@ public class LoginFragment extends Fragment {
         mEditTextEmail.setText(null);
         mEditTextPassword.setText(null);
 
-        Intent intent = new Intent(getActivity(), Main2Activity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
     }
 
