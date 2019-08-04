@@ -2,6 +2,10 @@ package com.lukmo.kamsos.UserInterface;
 
 
 import android.os.Bundle;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +14,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Models.Register.Register_;
 import com.lukmo.kamsos.Networking.NetworkUtils;

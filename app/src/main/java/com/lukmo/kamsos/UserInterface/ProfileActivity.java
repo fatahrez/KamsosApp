@@ -1,7 +1,5 @@
 package com.lukmo.kamsos.UserInterface;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +11,13 @@ import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
 public class ProfileActivity extends Main2Activity{
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+    }
+
     @Override
     int getContentViewId() {
         return R.layout.activity_profile;

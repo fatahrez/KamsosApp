@@ -1,26 +1,52 @@
 package com.lukmo.kamsos.UserInterface;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.lukmo.kamsos.R;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
-public abstract class Main2Activity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+import com.lukmo.kamsos.R;
+
+
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.lukmo.kamsos.Utils.PreferenceUtil;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+public abstract class Main2Activity extends AppCompatActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener {
+
     protected BottomNavigationView navigationView;
+
+    private int[][] states =
+            new int[][] {
+                    new int[] {android.R.attr.state_checked}, // checked
+                    new int[] {-android.R.attr.state_checked}, // unchecked
+            };
+
+    private int[] colors =
+            new int[] {
+                    Color.WHITE, // checked
+                    0 // unchecked set default in onCreate
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.element_bottom_navigation);
+        setContentView(getContentViewId());
 
+        colors[1] = ContextCompat.getColor(this, R.color.colorPrimary);
+        ColorStateList myList = new ColorStateList(states, colors);
         navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setItemIconTintList(myList);
+        navigationView.setItemTextColor(myList);
         navigationView.setOnNavigationItemSelectedListener(this);
 
     }
@@ -38,20 +64,24 @@ public abstract class Main2Activity extends AppCompatActivity implements BottomN
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        navigationView.postDelayed(() -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.navigation_home){
-                startActivity(new Intent(this, HomeActivity.class));
-            } else if (itemId == R.id.navigation_vets){
-                startActivity(new Intent(this, VetActivity.class));
-            } else if (itemId == R.id.navigation_agrovets){
-                startActivity(new Intent(this, AgrovetActivity.class));
-            } else if (itemId == R.id.navigation_account){
-                startActivity(new Intent(this, ProfileActivity.class));
+    public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
+        if (item.getItemId() != getNavigationMenuItemId()){
+            switch (item.getItemId()){
+                case R.id.navigation_home:
+                    Intent homeIntent = new Intent(this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    break;
+                case R.id.navigation_vets:
+                    Intent vetIntent = new Intent(this, VetActivity.class);
+                    startActivity(vetIntent);
+                    break;
+                case R.id.navigation_agrovets:
+                    Intent agrovetIntent = new Intent(this, AgrovetActivity.class);
+                    startActivity(agrovetIntent);
+                    break;
             }
             finish();
-        }, 3000);
+        }
         return true;
     }
 
@@ -61,9 +91,16 @@ public abstract class Main2Activity extends AppCompatActivity implements BottomN
         selectBottomNavigationBarItem(actionId);
     }
 
-    private void selectBottomNavigationBarItem(int itemId) {
-        MenuItem menuItem = navigationView.getMenu().findItem(itemId);
-        menuItem.setChecked(true);
+    void selectBottomNavigationBarItem(int itemId) {
+        Menu menu = navigationView.getMenu();
+        for (int i =0, size = menu.size(); i< size; i++){
+            MenuItem item = menu.getItem(i);
+            boolean shouldBeChecked = item.getItemId() == itemId;
+            if (shouldBeChecked){
+                item.setChecked(true);
+                break;
+            }
+        }
     }
 
     abstract int getContentViewId();

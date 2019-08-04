@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
-import com.lukmo.kamsos.Callback.Callback;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Login.User_;
 import com.lukmo.kamsos.Models.Vet.Vet;
@@ -27,7 +26,6 @@ import com.lukmo.kamsos.Networking.NetworkUtils;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
-import com.lukmo.kamsos.Utils.UserTask;
 
 import java.util.List;
 
@@ -36,7 +34,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Response;
 
 
 import static com.lukmo.kamsos.Utils.Validation.validateFields;
@@ -245,7 +242,7 @@ public class LoginFragment extends Fragment {
 
     private void showSnackBarMessage(String message){
         if (getView() != null){
-            Snackbar.make(getView(),message,Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),message, Snackbar.LENGTH_SHORT).show();
         }
     }
 

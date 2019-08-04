@@ -1,11 +1,10 @@
 package com.lukmo.kamsos.UserInterface;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
-import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.Presenters.UserPresenter;
 import com.lukmo.kamsos.R;
