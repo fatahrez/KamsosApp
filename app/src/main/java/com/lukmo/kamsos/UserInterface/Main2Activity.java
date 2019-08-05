@@ -59,6 +59,10 @@ public abstract class Main2Activity extends AppCompatActivity implements
                     Intent agrovetIntent = new Intent(this, AgrovetActivity.class);
                     startActivity(agrovetIntent);
                     break;
+                case R.id.navigation_account:
+                    Intent accountIntent = new Intent(this, ProfileActivity.class);
+                    startActivity(accountIntent);
+                    break;
             }
             finish();
         }
