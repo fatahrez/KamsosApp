@@ -1,8 +1,6 @@
 package com.lukmo.kamsos.UserInterface;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,12 +10,10 @@ import com.lukmo.kamsos.R;
 
 
 import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.lukmo.kamsos.Utils.PreferenceUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 public abstract class Main2Activity extends AppCompatActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {

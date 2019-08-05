@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lukmo.kamsos.R;
-import com.lukmo.kamsos.Utils.PreferenceUtil;
 
 import androidx.cardview.widget.CardView;
 
