@@ -6,7 +6,6 @@ import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.PreferenceUtil;
 
 public class HomeActivity extends Main2Activity {
-    private PreferenceUtil preferenceUtil;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

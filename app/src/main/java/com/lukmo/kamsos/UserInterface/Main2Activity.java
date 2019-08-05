@@ -24,29 +24,13 @@ public abstract class Main2Activity extends AppCompatActivity implements
 
     protected BottomNavigationView navigationView;
 
-    private int[][] states =
-            new int[][] {
-                    new int[] {android.R.attr.state_checked}, // checked
-                    new int[] {-android.R.attr.state_checked}, // unchecked
-            };
-
-    private int[] colors =
-            new int[] {
-                    Color.WHITE, // checked
-                    0 // unchecked set default in onCreate
-            };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(getContentViewId());
 
-        colors[1] = ContextCompat.getColor(this, R.color.colorPrimary);
-        ColorStateList myList = new ColorStateList(states, colors);
         navigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        navigationView.setItemIconTintList(myList);
-        navigationView.setItemTextColor(myList);
         navigationView.setOnNavigationItemSelectedListener(this);
 
     }
