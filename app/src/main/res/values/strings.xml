@@ -5,11 +5,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="signUp">Don\'t have an account?</string>
     <string name="Acc">Sign Up</string>
-    <string name="Login">Already Registered? Login</string>
+    <string name="Login">Already Registered?</string>
     <string name="invalid">Invalid Credentials</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-
+    <string name="title_dashboard">Vets</string>
+    <string name="title_notifications">Agrovets</string>
+    <string name="title_account">Account</string>
+    <string name="Change">Change Password</string>
 </resources>

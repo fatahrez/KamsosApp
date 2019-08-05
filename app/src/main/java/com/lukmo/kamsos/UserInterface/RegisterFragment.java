@@ -2,6 +2,8 @@ package com.lukmo.kamsos.UserInterface;
 
 
 import android.os.Bundle;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -9,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
-import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Models.Register.Register_;
 import com.lukmo.kamsos.Networking.NetworkUtils;
@@ -23,7 +22,8 @@ import com.lukmo.kamsos.R;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.*;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.lukmo.kamsos.Utils.Validation.validateEmail;
@@ -33,12 +33,15 @@ import static com.lukmo.kamsos.Utils.Validation.validateFields;
 public class RegisterFragment extends Fragment {
     public static final String TAG = RegisterFragment.class.getSimpleName();
 
+    private static View view;
+
+
     private EditText mEditTextName;
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
-    private  EditText mEditTextConfirmPassword;
+    private EditText mEditTextConfirmPassword;
     private Button mBtnRegister;
-    private TextView mTvLogin;
+    private LinearLayout mTvLogin;
     private TextInputLayout mTextInputname;
     private TextInputLayout mTextInputEmail;
     private TextInputLayout mTextInputPassword;
@@ -65,20 +68,20 @@ public class RegisterFragment extends Fragment {
     }
 
     private void initViews(View v) {
-        mEditTextName = (EditText) v.findViewById(R.id.edittext_name);
-        mEditTextEmail = (EditText) v.findViewById(R.id.edittext_email);
-        mEditTextPassword = (EditText) v.findViewById(R.id.edittext_password);
-        mEditTextConfirmPassword = (EditText) v.findViewById(R.id.edittext_confirmpassword);
+        mEditTextName = v.findViewById(R.id.edittext_name);
+        mEditTextEmail = v.findViewById(R.id.edittext_email);
+        mEditTextPassword = v.findViewById(R.id.edittext_password);
+        mEditTextConfirmPassword = v.findViewById(R.id.edittext_confirmpassword);
 
-        mBtnRegister = (Button) v.findViewById(R.id.btn_register);
-        mTvLogin = (TextView) v.findViewById(R.id.tv_login);
+        mBtnRegister = v.findViewById(R.id.btn_register);
+        mTvLogin = v.findViewById(R.id.tv_login);
 
-        mTextInputname = (TextInputLayout) v.findViewById(R.id.textinput_name);
-        mTextInputEmail = (TextInputLayout) v.findViewById(R.id.textinput_email);
-        mTextInputPassword = (TextInputLayout) v.findViewById(R.id.textinput_password);
-        mTextInputConfirmPassword = (TextInputLayout) v.findViewById(R.id.textinput_confirmpassword);
+        mTextInputname = v.findViewById(R.id.textinput_name);
+        mTextInputEmail = v.findViewById(R.id.textinput_email);
+        mTextInputPassword = v.findViewById(R.id.textinput_password);
+        mTextInputConfirmPassword = v.findViewById(R.id.textinput_confirmpassword);
 
-        mProgressBar = (ProgressBar) v.findViewById(R.id.progress);
+        mProgressBar = v.findViewById(R.id.progress);
 
         mUserService = NetworkUtils.ApiInstance();
 
@@ -97,48 +100,61 @@ public class RegisterFragment extends Fragment {
 
         int err = 0;
 
-        if (!validateFields(name)){
+        if (!validateFields(name) || !validateEmail(email) ||
+                !validateFields(password) || !validateFields(confirmPassword)) {
             err++;
-            mTextInputname.setError("Name should not be empty!");
-        }
-
-        if (!validateEmail(email)){
+            new CustomToast().Show_Toast(getContext(), view,
+                    "Fill All Fields");
+        } else if (!validateEmail(email)) {
             err++;
-            mTextInputEmail.setError("Email should be valid!");
-        }
-
-        if (!validateFields(password)){
+            new CustomToast().Show_Toast(getContext(), view,
+                    "Enter a valid Email!");
+        } else if (!password.equals(confirmPassword)) {
             err++;
-            mTextInputPassword.setError("Password should not be empty!");
-        }
-
-        if (!validateFields(confirmPassword)){
-            err++;
-            mTextInputConfirmPassword.setError("Password should not be empty!");
-        }
-
-        if (!password.equals(confirmPassword)){
-            err++;
-            mTextInputConfirmPassword.setError("The passwords do not match");
-        }
-
-
-        if (err == 0){
+            new CustomToast().Show_Toast(getContext(), view,
+                    "The passwords do not match!");
+        } else {
             mProgressBar.setVisibility(View.VISIBLE);
             registerProcess(email, name, password);
-        } else {
-            showSnackBarMessage("Enter Valid Details!");
         }
+
+//        if (!validateEmail(email)){
+//            err++;
+//            mTextInputEmail.setError("Email should be valid!");
+//        }
+
+//        if (!validateFields(password)){
+//            err++;
+//            mTextInputPassword.setError("Password should not be empty!");
+//        }
+
+//        if (!validateFields(confirmPassword)){
+//            err++;
+//            mTextInputConfirmPassword.setError("Password should not be empty!");
+//        }
+//
+//        if (!password.equals(confirmPassword)){
+//            err++;
+//            mTextInputConfirmPassword.setError("The passwords do not match");
+//        }
+
+
+//        if (err == 0){
+//            mProgressBar.setVisibility(View.VISIBLE);
+//            registerProcess(email, name, password);
+//        } else {
+//            showSnackBarMessage("Enter Valid Details!");
+//        }
     }
 
-    private void setError(){
+    private void setError() {
         mTextInputname.setError(null);
         mTextInputEmail.setError(null);
         mTextInputPassword.setError(null);
         mTextInputConfirmPassword.setError(null);
     }
 
-    private void registerProcess(String email, String name, String password){
+    private void registerProcess(String email, String name, String password) {
         Register register = new Register();
         Register_ register_ = new Register_();
         register_.setEmail(email);
@@ -146,7 +162,7 @@ public class RegisterFragment extends Fragment {
         register_.setPassword(password);
         register.setUser(register_);
 
-        mUserService.register("application/json",register)
+        mUserService.register("application/json", register)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Register>() {
@@ -174,8 +190,8 @@ public class RegisterFragment extends Fragment {
     }
 
 
-    private void showSnackBarMessage(String message){
-        if (getView() != null){
+    private void showSnackBarMessage(String message) {
+        if (getView() != null) {
             Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
         }
     }

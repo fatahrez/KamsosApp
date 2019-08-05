@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,21 +19,21 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Login.User_;
+import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.Networking.NetworkUtils;
 import com.lukmo.kamsos.Networking.UserService;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
+
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Response;
 
 
 import static com.lukmo.kamsos.Utils.Validation.validateFields;
@@ -69,6 +71,7 @@ public class LoginFragment extends Fragment {
         mSubscription = new CompositeDisposable();
         initViews(view);
         initSharedPreferences();
+
         return view;
     }
 
@@ -99,6 +102,8 @@ public class LoginFragment extends Fragment {
 
     private void showDialog() {
 
+
+
     }
 
     private void goToRegister() {
@@ -116,14 +121,14 @@ public class LoginFragment extends Fragment {
 
         int err = 0;
 
-        if ( !validateEmail(email) && !validateFields(password)){
+        if ( !validateEmail(email) || !validateFields(password)){
             new CustomToast().Show_Toast(getContext(), view,
                   "Enter Valid Details");
 
         } else if (!validateEmail(email)){
             err++;
             new CustomToast().Show_Toast(getContext(), view,
-                    "Your Email Id is Invalid.");
+                    "Your Email is Invalid.");
 
         }  else if (!validateFields(password)){
             err++;
@@ -132,6 +137,28 @@ public class LoginFragment extends Fragment {
         } else {
             loginProcess(email,password);
             mProgressBar.setVisibility(View.VISIBLE);
+
+            mUserService.getVets().subscribeOn(Schedulers.io()).subscribe(new Observer<List<Vet>>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(List<Vet> vets) {
+                    Log.i(TAG , "Vet response: " + vets.get(1).toString());
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
         }
 
 //        if (!validateEmail(email)){
@@ -149,6 +176,7 @@ public class LoginFragment extends Fragment {
 
 
     }
+
 
     private void setError(){
         mTextInputEmail.setError(null);
@@ -201,7 +229,7 @@ public class LoginFragment extends Fragment {
         mEditTextEmail.setText(null);
         mEditTextPassword.setText(null);
 
-        Intent intent = new Intent(getActivity(), Main2Activity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
     }
 
@@ -214,7 +242,7 @@ public class LoginFragment extends Fragment {
 
     private void showSnackBarMessage(String message){
         if (getView() != null){
-            Snackbar.make(getView(),message,Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getView(),message, Snackbar.LENGTH_SHORT).show();
         }
     }
 

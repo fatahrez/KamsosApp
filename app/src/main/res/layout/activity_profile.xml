@@ -8,6 +8,10 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     tools:context=".UserInterface.ProfileActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linear_bottombar"/>
 
     <ProgressBar
         android:id="@+id/progress"
@@ -79,5 +83,19 @@
             android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="Logout" />
+
+    <LinearLayout
+        android:id="@+id/linear_bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <include
+            android:id="@+id/navigation"
+            layout="@layout/element_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -1,7 +1,5 @@
 package com.lukmo.kamsos.UserInterface;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +10,9 @@ import android.widget.ProgressBar;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends Main2Activity{
+
+
     private Button mBtLogout;
 
     private ProgressBar mProgressbar;
@@ -24,8 +24,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-
         initViews();
         initSharedPreferences();
     }
@@ -59,5 +57,16 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+
+    @Override
+    int getContentViewId() {
+        return R.layout.activity_profile;
+    }
+
+    @Override
+    int getNavigationMenuItemId() {
+        return R.id.navigation_account;
     }
 }
