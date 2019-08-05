@@ -8,7 +8,18 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linear_bottombar"/>
+        android:layout_above="@+id/linear_bottombar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vets"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vet_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
     <LinearLayout
         android:id="@+id/linear_bottombar"
         android:layout_width="match_parent"

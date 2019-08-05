@@ -24,6 +24,7 @@ public class ProfileActivity extends Main2Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initViews();
         initSharedPreferences();
     }
