@@ -9,8 +9,11 @@ import com.lukmo.kamsos.UserInfrastructure.UserInfrastructure;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 public class VetActivity extends Main2Activity implements UserInfrastructure.View{
     private UserInfrastructure.Presenter mPresenter;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
