@@ -25,8 +25,8 @@ public class ProfileActivity extends Main2Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        initViews();
-//        initSharedPreferences();
+        initViews();
+        initSharedPreferences();
     }
 
     private void initViews() {
