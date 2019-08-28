@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:padding="20dp"
+            >
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="#fff"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity=""
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:text="Log In"
+                android:textColor="#fff"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/nunito_bold" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_email"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="24dp"
+                app:hintEnabled="false"
+                android:background="@drawable/edittextstyle"
+                >
+
+                <EditText
+                    android:id="@+id/edittext_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:drawableEnd="@drawable/ic_email"
+                    android:drawableRight="@drawable/ic_email"
+                    android:drawableTint="#000"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:background="#00000000"
+                    android:textCursorDrawable="@drawable/cursor_drawable"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#000"
+                android:layout_marginTop="20dp"
+                android:padding="0dp"
+                app:hintEnabled="false"
+                android:background="@drawable/edittextstyle"
+                >
+
+                <EditText
+                    android:id="@+id/edittext_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:background="#00000000"
+                    android:textCursorDrawable="@drawable/cursor_drawable"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Forgot Password?"
+                android:textAlignment="center"
+                android:layout_gravity="end"
+                />
+
+
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Login"
+                android:textColor="#fff"
+                app:fontFamily="@font/nunito_bold"
+                android:background="@drawable/buttonsstyle"
+                android:elevation="1dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+
+
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signUp"
+                    android:layout_gravity="start"
+                    android:layout_marginRight="10dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/Acc"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_response"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Response"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>
