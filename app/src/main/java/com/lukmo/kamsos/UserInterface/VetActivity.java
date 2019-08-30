@@ -10,10 +10,11 @@ import com.lukmo.kamsos.UserInfrastructure.UserInfrastructure;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class VetActivity extends Main2Activity implements UserInfrastructure.View{
+public class VetActivity extends AppCompatActivity implements UserInfrastructure.View{
     private UserInfrastructure.Presenter mPresenter;
     VetCustomAdapter adapter;
     private RecyclerView recyclerView;
@@ -21,6 +22,8 @@ public class VetActivity extends Main2Activity implements UserInfrastructure.Vie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_vet);
+
 
         mPresenter = new UserPresenter(this);
         mPresenter.start();
@@ -45,13 +48,13 @@ public class VetActivity extends Main2Activity implements UserInfrastructure.Vie
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    int getContentViewId() {
-        return R.layout.activity_vet;
-    }
-
-    @Override
-    int getNavigationMenuItemId() {
-        return R.id.navigation_vets;
-    }
+//    @Override
+//    int getContentViewId() {
+//        return R.layout.activity_vet;
+//    }
+//
+//    @Override
+//    int getNavigationMenuItemId() {
+//        return R.id.navigation_vets;
+//    }
 }

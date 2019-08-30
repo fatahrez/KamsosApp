@@ -4,11 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Login.User_;
 import com.lukmo.kamsos.Models.Vet.Vet;
@@ -35,9 +35,8 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-
-import static com.lukmo.kamsos.Utils.Validation.validateFields;
 import static com.lukmo.kamsos.Utils.Validation.validateEmail;
+import static com.lukmo.kamsos.Utils.Validation.validateFields;
 
 public class LoginFragment extends Fragment {
     public static final String TAG = LoginFragment.class.getSimpleName();
@@ -67,7 +66,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the cursor_drawable for this fragment
-        View view= inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
         mSubscription = new CompositeDisposable();
         initViews(view);
         initSharedPreferences();
@@ -80,18 +79,18 @@ public class LoginFragment extends Fragment {
     }
 
     private void initViews(View v) {
-        mEditTextEmail = (EditText) v.findViewById(R.id.edittext_email);
-        mEditTextPassword = (EditText) v.findViewById(R.id.edittext_password);
-        mBtnLogin = (Button) v.findViewById(R.id.btn_login);
+        mEditTextEmail = v.findViewById(R.id.edittext_email);
+        mEditTextPassword = v.findViewById(R.id.edittext_password);
+        mBtnLogin = v.findViewById(R.id.btn_login);
 
-        mTextInputEmail = (TextInputLayout) v.findViewById(R.id.textinput_email);
-        mTextInputPassword = (TextInputLayout) v.findViewById(R.id.textinput_password);
+        mTextInputEmail = v.findViewById(R.id.textinput_email);
+        mTextInputPassword = v.findViewById(R.id.textinput_password);
 
-        mProgressBar = (ProgressBar) v.findViewById(R.id.progress);
+        mProgressBar = v.findViewById(R.id.progress);
 
-        mTvRegister = (LinearLayout) v.findViewById(R.id.tv_register);
-        mTvForgotPassword = (TextView) v.findViewById(R.id.tv_forgot_password);
-        mResponseTv = (TextView) v.findViewById(R.id.tv_response);
+        mTvRegister = v.findViewById(R.id.tv_register);
+        mTvForgotPassword = v.findViewById(R.id.tv_forgot_password);
+        mResponseTv = v.findViewById(R.id.tv_response);
 
         mUserService = NetworkUtils.ApiInstance();
 
@@ -101,7 +100,6 @@ public class LoginFragment extends Fragment {
     }
 
     private void showDialog() {
-
 
 
     }
@@ -121,21 +119,21 @@ public class LoginFragment extends Fragment {
 
         int err = 0;
 
-        if ( !validateEmail(email) || !validateFields(password)){
+        if (!validateEmail(email) || !validateFields(password)) {
             new CustomToast().Show_Toast(getContext(), view,
-                  "Enter Valid Details");
+                    "Enter Valid Details");
 
-        } else if (!validateEmail(email)){
+        } else if (!validateEmail(email)) {
             err++;
             new CustomToast().Show_Toast(getContext(), view,
                     "Your Email is Invalid.");
 
-        }  else if (!validateFields(password)){
+        } else if (!validateFields(password)) {
             err++;
             new CustomToast().Show_Toast(getContext(), view,
                     "Enter Password !");
         } else {
-            loginProcess(email,password);
+            loginProcess(email, password);
             mProgressBar.setVisibility(View.VISIBLE);
 
             mUserService.getVets().subscribeOn(Schedulers.io()).subscribe(new Observer<List<Vet>>() {
@@ -146,7 +144,7 @@ public class LoginFragment extends Fragment {
 
                 @Override
                 public void onNext(List<Vet> vets) {
-                    Log.i(TAG , "Vet response: " + vets.get(1).toString());
+                    Log.i(TAG, "Vet response: " + vets.get(1).toString());
                 }
 
                 @Override
@@ -178,7 +176,7 @@ public class LoginFragment extends Fragment {
     }
 
 
-    private void setError(){
+    private void setError() {
         mTextInputEmail.setError(null);
         mTextInputPassword.setError(null);
     }
@@ -201,7 +199,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onNext(User user) {
                         showResponse(user.toString());
-                        Log.i(TAG, "Response: "+ user);
+                        Log.i(TAG, "Response: " + user);
                         mProgressBar.setVisibility(View.GONE);
                         String token = user.getUser().getToken();
                         Log.i(TAG, "Response: " + token);
@@ -230,25 +228,27 @@ public class LoginFragment extends Fragment {
         mEditTextPassword.setText(null);
 
         Intent intent = new Intent(getActivity(), HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+
     }
 
     private void showResponse(String toString) {
-        if (mResponseTv.getVisibility() == View.GONE){
+        if (mResponseTv.getVisibility() == View.GONE) {
             mResponseTv.setVisibility(View.VISIBLE);
         }
         mResponseTv.setText(toString);
     }
 
-    private void showSnackBarMessage(String message){
-        if (getView() != null){
-            Snackbar.make(getView(),message, Snackbar.LENGTH_SHORT).show();
+    private void showSnackBarMessage(String message) {
+        if (getView() != null) {
+            Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
         }
     }
 
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         mSubscription.dispose();
     }

@@ -8,17 +8,14 @@
 
     <item
         android:id="@+id/navigation_vets"
-        android:icon="@drawable/cowsilhouette"
         android:title="@string/title_dashboard" />
 
     <item
         android:id="@+id/navigation_agrovets"
-        android:icon="@drawable/drug"
         android:title="@string/title_notifications" />
 
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/baseline_account_box_24"
         android:title="@string/title_account" />
 
 </menu>

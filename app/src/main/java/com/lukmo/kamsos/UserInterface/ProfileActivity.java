@@ -7,10 +7,12 @@ import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
-public class ProfileActivity extends Main2Activity{
+public class ProfileActivity extends AppCompatActivity {
 
 
     private Button mBtLogout;
@@ -61,13 +63,13 @@ public class ProfileActivity extends Main2Activity{
     }
 
 
-    @Override
-    int getContentViewId() {
-        return R.layout.activity_profile;
-    }
-
-    @Override
-    int getNavigationMenuItemId() {
-        return R.id.navigation_account;
-    }
+//    @Override
+//    int getContentViewId() {
+//        return R.layout.activity_profile;
+//    }
+//
+//    @Override
+//    int getNavigationMenuItemId() {
+//        return R.id.navigation_account;
+//    }
 }

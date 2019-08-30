@@ -63,7 +63,7 @@
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
                     android:background="#00000000"
-                    android:textCursorDrawable="@drawable/cursor_drawable"
+                        android:textCursorDrawable="@drawable/cursor_drawable"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

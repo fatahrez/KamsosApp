@@ -9,20 +9,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linear_bottombar"/>
+     />
 
-    <LinearLayout
-        android:id="@+id/linear_bottombar"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
-        <include
-            android:id="@+id/navigation"
-            layout="@layout/element_bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
-    </LinearLayout>
+        android:text="Agrovet works fine"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
 
 </RelativeLayout>

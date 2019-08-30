@@ -6,15 +6,19 @@ import android.view.View;
 
 import com.lukmo.kamsos.R;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-public class HomeActivity extends Main2Activity {
+public class HomeActivity extends AppCompatActivity {
     private CardView vetCardView;
     private CardView agrovetCardView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+
 
         vetCardView = (CardView) findViewById(R.id.to_vet_card_view);
         agrovetCardView = (CardView) findViewById(R.id.to_agrovet_card_view);
@@ -34,13 +38,4 @@ public class HomeActivity extends Main2Activity {
         });
     }
 
-    @Override
-    int getContentViewId() {
-        return R.layout.activity_home;
-    }
-
-    @Override
-    int getNavigationMenuItemId() {
-        return R.id.navigation_home;
-    }
 }
