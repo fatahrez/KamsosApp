@@ -137,27 +137,27 @@ public class LoginFragment extends Fragment {
             loginProcess(email, password);
             mProgressBar.setVisibility(View.VISIBLE);
 
-            mUserService.getVets().subscribeOn(Schedulers.io()).subscribe(new Observer<List<Vet>>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-
-                }
-
-                @Override
-                public void onNext(List<Vet> vets) {
-                    Log.i(TAG, "Vet response: " + vets.get(1).toString());
-                }
-
-                @Override
-                public void onError(Throwable e) {
-
-                }
-
-                @Override
-                public void onComplete() {
-
-                }
-            });
+//            mUserService.getVets().subscribeOn(Schedulers.io()).subscribe(new Observer<List<Vet>>() {
+//                @Override
+//                public void onSubscribe(Disposable d) {
+//
+//                }
+//
+//                @Override
+//                public void onNext(List<Vet> vets) {
+//                    Log.i(TAG, "Vet response: " + vets.get(1).toString());
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//
+//                }
+//
+//                @Override
+//                public void onComplete() {
+//
+//                }
+//            });
         }
 
 //        if (!validateEmail(email)){
