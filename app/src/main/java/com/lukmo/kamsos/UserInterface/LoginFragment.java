@@ -105,6 +105,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void goToRegister() {
+        assert getFragmentManager() != null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         RegisterFragment fragment = new RegisterFragment();
         ft.replace(R.id.fragmentFrame, fragment, RegisterFragment.TAG);
@@ -219,10 +220,11 @@ public class LoginFragment extends Fragment {
     }
 
     private void handleResponse(String response) {
-        SharedPreferences.Editor editor = mSharedPreference.edit();
-        editor.putString(Constants.TOKEN, response);
-        editor.putString(Constants.EMAIL, response);
-        editor.apply();
+        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(Constants.TOKEN, response).apply();
+//        SharedPreferences.Editor editor = mSharedPreference.edit();
+//        editor.putString(Constants.TOKEN, response.toString());
+//        editor.putString(Constants.EMAIL, response);
+//        editor.apply();
 
         mEditTextEmail.setText(null);
         mEditTextPassword.setText(null);

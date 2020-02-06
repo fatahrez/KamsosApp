@@ -96,6 +96,32 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinput_phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/edittextstyle"
+                app:hintEnabled="false"
+
+                >
+
+                <EditText
+                    android:id="@+id/edittext_phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:drawableEnd="@drawable/ic_email"
+                    android:drawableRight="@drawable/ic_email"
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:padding="10dp"
+                    android:textCursorDrawable="@drawable/cursor_drawable"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinput_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

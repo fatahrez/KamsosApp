@@ -10,6 +10,9 @@ public class Register_ {
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("phone_number")
+    @Expose
+    private String phoneNumber;
     @SerializedName("password")
     @Expose
     private String password;
@@ -23,6 +26,14 @@ public class Register_ {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public  String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
@@ -43,7 +54,7 @@ public class Register_ {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("email", email).append("password", password).append("username", username).toString();
+        return new ToStringBuilder(this).append("email", email).append("phoneNumber").append("password", password).append("username", username).toString();
     }
 
 }
