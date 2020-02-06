@@ -8,7 +8,7 @@ import com.lukmo.kamsos.Utils.UserTask;
 import java.util.List;
 
 public class UserPresenter implements UserInfrastructure.Presenter {
-    public UserInfrastructure.View mView;
+    UserInfrastructure.View mView;
 
     public UserPresenter(UserInfrastructure.View mView){
         this.mView = mView;

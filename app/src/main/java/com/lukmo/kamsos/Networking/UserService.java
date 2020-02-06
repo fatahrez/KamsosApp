@@ -28,6 +28,6 @@ public interface UserService {
             @Body User user
     );
 
-    @GET("vets")
+    @GET("vets/")
     Observable<List<Vet>> getVets();
 }

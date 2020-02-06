@@ -29,7 +29,7 @@ public class UserTask {
                     @Override
                     public void onNext(List<Vet> vets) {
                         callback.getData(vets);
-                        Log.i("Vet response: " + "",vets.toString());
+                        Log.i("Vet response: " + "", vets.toString());
                     }
 
                     @Override

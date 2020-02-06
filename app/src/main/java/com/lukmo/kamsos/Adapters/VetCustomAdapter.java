@@ -11,7 +11,10 @@ import com.lukmo.kamsos.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyViewHolder> {
     public List<Vet> vetList = new ArrayList<>();
@@ -20,15 +23,16 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
         this.vetList = vetList;
     }
 
+    @NotNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i){
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.vet_recycler_item, viewGroup, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(VetCustomAdapter.MyViewHolder myViewHolder, int i){
-        myViewHolder .tvVet.setText(vetList.get(i).getUsername());
+        myViewHolder.tvVet.setText(vetList.get(i).getUsername());
     }
 
     @Override
