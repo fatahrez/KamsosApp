@@ -8,7 +8,7 @@ import com.lukmo.kamsos.Utils.UserTask;
 import java.util.List;
 
 public class UserPresenter implements UserInfrastructure.Presenter {
-    public UserInfrastructure.View mView;
+    UserInfrastructure.View mView;
 
     public UserPresenter(UserInfrastructure.View mView){
         this.mView = mView;
@@ -21,10 +21,10 @@ public class UserPresenter implements UserInfrastructure.Presenter {
 
     @Override
     public void loadVets() {
-        UserTask.getData(new Callback<List<Vet>>() {
+        UserTask.getData(new Callback<Vet>() {
             @Override
-            public void getData(List<Vet> vets) {
-                mView.loadDataInList(vets);
+            public void getData(Vet vets) {
+                mView.loadDataInList(vets.getVet().getResults());
             }
 
             @Override

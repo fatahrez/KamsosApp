@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.lukmo.kamsos.Models.Vet.Result;
 import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.Presenters.UserPresenter;
 import com.lukmo.kamsos.R;
@@ -67,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
     }
 
     @Override
-    public void loadDataInList(List<Vet> vets) {
-        Log.i( TAG, "Vet Response"+ vets.get(0).getEmail());
+    public void loadDataInList(List<Result> vets) {
+
     }
 
     @Override

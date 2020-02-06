@@ -2,6 +2,7 @@ package com.lukmo.kamsos.Utils;
 
 import android.util.Log;
 
+import com.google.gson.internal.$Gson$Preconditions;
 import com.lukmo.kamsos.Callback.Callback;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Vet.Vet;
@@ -15,21 +16,21 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserTask {
-    public static void getData(final Callback<List<Vet>> callback){
+    public static void getData(final Callback<Vet> callback){
         NetworkUtils.ApiInstance()
-                .getVets()
+                .getVets("application/json")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<List<Vet>>() {
+                .subscribe(new Observer<Vet>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<Vet> vets) {
+                    public void onNext(Vet vets) {
                         callback.getData(vets);
-                        Log.i("Vet response: " + "",vets.toString());
+                        Log.i("Vet response: " + "", vets.toString());
                     }
 
                     @Override

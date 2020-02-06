@@ -29,5 +29,8 @@ public interface UserService {
     );
 
     @GET("vets")
-    Observable<List<Vet>> getVets();
+    @Headers("X-Requested-With:XMLHttpRequest")
+    Observable<Vet> getVets(
+            @Header("Content-Type") String content_type
+    );
 }
