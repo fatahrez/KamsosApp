@@ -40,6 +40,7 @@ public class RegisterFragment extends Fragment {
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
     private EditText mEditTextConfirmPassword;
+    private EditText mEditTextPhonenumber;
     private Button mBtnRegister;
     private LinearLayout mTvLogin;
     private TextInputLayout mTextInputname;
@@ -70,6 +71,7 @@ public class RegisterFragment extends Fragment {
     private void initViews(View v) {
         mEditTextName = v.findViewById(R.id.edittext_name);
         mEditTextEmail = v.findViewById(R.id.edittext_email);
+        mEditTextPhonenumber = v.findViewById(R.id.edittext_phonenumber);
         mEditTextPassword = v.findViewById(R.id.edittext_password);
         mEditTextConfirmPassword = v.findViewById(R.id.edittext_confirmpassword);
 
@@ -95,13 +97,14 @@ public class RegisterFragment extends Fragment {
 
         String name = mEditTextName.getText().toString();
         String email = mEditTextEmail.getText().toString().trim();
+        String phone_number = mEditTextPhonenumber.getText().toString();
         String password = mEditTextPassword.getText().toString();
         String confirmPassword = mEditTextConfirmPassword.getText().toString();
 
         int err = 0;
 
         if (!validateFields(name) || !validateEmail(email) ||
-                !validateFields(password) || !validateFields(confirmPassword)) {
+                !validateFields(password) || !validateFields(confirmPassword) || !validateFields(phone_number)) {
             err++;
             new CustomToast().Show_Toast(getContext(), view,
                     "Fill All Fields");
@@ -115,7 +118,7 @@ public class RegisterFragment extends Fragment {
                     "The passwords do not match!");
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
-            registerProcess(email, name, password);
+            registerProcess(email, name, phone_number, password);
         }
 
 //        if (!validateEmail(email)){
@@ -154,11 +157,12 @@ public class RegisterFragment extends Fragment {
         mTextInputConfirmPassword.setError(null);
     }
 
-    private void registerProcess(String email, String name, String password) {
+    private void registerProcess(String email, String name, String phone_number, String password) {
         Register register = new Register();
         Register_ register_ = new Register_();
         register_.setEmail(email);
         register_.setUsername(name);
+        register_.setPhoneNumber(phone_number);
         register_.setPassword(password);
         register.setUser(register_);
 
