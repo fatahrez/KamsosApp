@@ -35,9 +35,6 @@ public class MainActivity extends AppCompatActivity implements UserInfrastructur
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        sharedPreferences = this.getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-//        Log.i(TAG, "onCreate: shredPref " + sharedPreferences);
-//        String token = sharedPreferences.getString(TOKEN, null);
         String token = PreferenceManager.getDefaultSharedPreferences(this).getString(TOKEN, null);
         Log.i(TAG, "loadFragment: token " + token);
 

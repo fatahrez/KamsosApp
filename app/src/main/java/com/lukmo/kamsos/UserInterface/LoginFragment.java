@@ -28,6 +28,7 @@ import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -121,12 +122,12 @@ public class LoginFragment extends Fragment {
         int err = 0;
 
         if (!validateEmail(email) || !validateFields(password)) {
-            new CustomToast().Show_Toast(getContext(), view,
+            new CustomToast().Show_Toast(Objects.requireNonNull(getContext()), view,
                     "Enter Valid Details");
 
         } else if (!validateEmail(email)) {
             err++;
-            new CustomToast().Show_Toast(getContext(), view,
+            new CustomToast().Show_Toast(Objects.requireNonNull(getContext()), view,
                     "Your Email is Invalid.");
 
         } else if (!validateFields(password)) {
@@ -136,28 +137,6 @@ public class LoginFragment extends Fragment {
         } else {
             loginProcess(email, password);
             mProgressBar.setVisibility(View.VISIBLE);
-
-//            mUserService.getVets().subscribeOn(Schedulers.io()).subscribe(new Observer<List<Vet>>() {
-//                @Override
-//                public void onSubscribe(Disposable d) {
-//
-//                }
-//
-//                @Override
-//                public void onNext(List<Vet> vets) {
-//                    Log.i(TAG, "Vet response: " + vets.get(1).toString());
-//                }
-//
-//                @Override
-//                public void onError(Throwable e) {
-//
-//                }
-//
-//                @Override
-//                public void onComplete() {
-//
-//                }
-//            });
         }
 
 //        if (!validateEmail(email)){
@@ -166,7 +145,7 @@ public class LoginFragment extends Fragment {
 //                    "Your Email Id is Invalid.");
 //
 //        }
-
+//
 //        if (!validateFields(password)){
 //            err++;
 //            new CustomToast().Show_Toast(getContext(), view,
@@ -221,10 +200,6 @@ public class LoginFragment extends Fragment {
 
     private void handleResponse(String response) {
         PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putString(Constants.TOKEN, response).apply();
-//        SharedPreferences.Editor editor = mSharedPreference.edit();
-//        editor.putString(Constants.TOKEN, response.toString());
-//        editor.putString(Constants.EMAIL, response);
-//        editor.apply();
 
         mEditTextEmail.setText(null);
         mEditTextPassword.setText(null);

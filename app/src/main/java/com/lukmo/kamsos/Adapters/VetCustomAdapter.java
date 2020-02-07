@@ -4,11 +4,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lukmo.kamsos.Models.Vet.Result;
 import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +37,8 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
 
     @Override
     public void onBindViewHolder(VetCustomAdapter.MyViewHolder myViewHolder, int i){
-        Log.i(TAG, "onBindViewHolder: vetEmail " + vetList.get(i).getEmail());
         myViewHolder.tvVet.setText(vetList.get(i).getEmail());
+        Picasso.get().load("https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80").into(myViewHolder.imageVet);
     }
 
     @Override
@@ -46,9 +48,11 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView tvVet;
+        ImageView imageVet;
         public MyViewHolder(View itemView){
             super(itemView);
             tvVet = (TextView) itemView.findViewById(R.id.user_name);
+            imageVet = (ImageView) itemView.findViewById(R.id.vet_recycler_view_image);
         }
     }
 }
