@@ -1,5 +1,6 @@
 package com.lukmo.kamsos.UserInterface;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -26,6 +27,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.lukmo.kamsos.Utils.Constants.TOKEN;
+
 public class VetActivity extends AppCompatActivity implements UserInfrastructure.View{
     private static final String TAG = "VetActivity";
 
@@ -37,6 +40,12 @@ public class VetActivity extends AppCompatActivity implements UserInfrastructure
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet);
+
+        String token = PreferenceManager.getDefaultSharedPreferences(this).getString(TOKEN, null);
+
+        if(token == null) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
         mPresenter = new UserPresenter(this);
         mPresenter.start();
