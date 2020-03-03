@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="FontTextViewStyle" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="pix_font">fonts/Roboto-Regular.ttf</item>
         <item name="pix_fontBold">fonts/Roboto-Medium.ttf</item>

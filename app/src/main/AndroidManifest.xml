@@ -17,7 +17,7 @@
 
         <activity android:name=".UserInterface.ProfileActivity" />
         <activity android:name=".UserInterface.MainActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

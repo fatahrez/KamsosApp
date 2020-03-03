@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
@@ -65,11 +67,27 @@ public class ProfileActivity extends AppCompatActivity {
         mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        finish();
+//    }
+
     @Override
-    public void onBackPressed() {
-        finish();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                PreferenceManager.getDefaultSharedPreferences(this).edit().remove(Constants.TOKEN).apply();
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 //    @Override
 //    int getContentViewId() {

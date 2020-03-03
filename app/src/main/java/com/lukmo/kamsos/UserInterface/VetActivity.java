@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.lukmo.kamsos.Adapters.VetCustomAdapter;
@@ -71,6 +73,22 @@ public class VetActivity extends AppCompatActivity implements UserInfrastructure
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                PreferenceManager.getDefaultSharedPreferences(this).edit().remove(Constants.TOKEN).apply();
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 //    @Override
 //    int getContentViewId() {
