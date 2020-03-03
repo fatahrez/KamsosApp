@@ -38,7 +38,7 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
     @Override
     public void onBindViewHolder(VetCustomAdapter.MyViewHolder myViewHolder, int i){
         myViewHolder.tvVet.setText(vetList.get(i).getEmail());
-        Picasso.get().load("https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80").into(myViewHolder.imageVet);
+        Picasso.get().load(vetList.get(i).getVetImage()).into(myViewHolder.imageVet);
     }
 
     @Override

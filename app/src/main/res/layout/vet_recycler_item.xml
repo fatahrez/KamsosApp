@@ -24,12 +24,10 @@
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:gravity="center"
             android:padding="4dp"
             android:text="Username" />
     </LinearLayout>
 
-
 </androidx.cardview.widget.CardView>
-

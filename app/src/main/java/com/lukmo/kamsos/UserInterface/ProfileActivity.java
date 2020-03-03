@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.Utils.Constants;
 
+import static com.lukmo.kamsos.Utils.Constants.TOKEN;
+
 public class ProfileActivity extends AppCompatActivity {
 
 
@@ -26,6 +28,12 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String token = PreferenceManager.getDefaultSharedPreferences(this).getString(TOKEN, null);
+
+        if(token == null) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
         initViews();
         initSharedPreferences();
