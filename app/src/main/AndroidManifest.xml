@@ -14,11 +14,10 @@
         <activity android:name=".UserInterface.AgrovetActivity"></activity>
         <activity android:name=".UserInterface.VetActivity" />
         <activity android:name=".UserInterface.HomeActivity" />
-        <!--<activity-->
-            <!--android:name=".UserInterface.Main2Activity"-->
-            <!--android:label="@string/title_activity_main2" />-->
+
         <activity android:name=".UserInterface.ProfileActivity" />
-        <activity android:name=".UserInterface.MainActivity">
+        <activity android:name=".UserInterface.MainActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
