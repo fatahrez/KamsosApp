@@ -3,6 +3,7 @@ package com.lukmo.kamsos.Networking;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Models.Vet.Vet;
+import com.lukmo.kamsos.Models.VetDetails.VetDetails;
 
 import java.util.List;
 
@@ -33,4 +34,8 @@ public interface UserService {
     Observable<Vet> getVets(
             @Header("Content-Type") String content_type
     );
+
+    @GET("vets/{slug}")
+    @Headers("X-Requested-With:XMLHttpRequest")
+    Observable<VetDetails> getVetDetails();
 }
