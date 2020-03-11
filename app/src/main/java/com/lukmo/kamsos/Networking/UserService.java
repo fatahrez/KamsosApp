@@ -3,15 +3,19 @@ package com.lukmo.kamsos.Networking;
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
 import com.lukmo.kamsos.Models.Vet.Vet;
+import com.lukmo.kamsos.Models.VetDetails.VetDetails;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 public interface UserService {
     @POST("auth/createpastoralist")
@@ -32,5 +36,11 @@ public interface UserService {
     @Headers("X-Requested-With:XMLHttpRequest")
     Observable<Vet> getVets(
             @Header("Content-Type") String content_type
+    );
+
+    @GET("vets/{slug}")
+    @Headers("X-Requested-With:XMLHttpRequest")
+    Call<VetDetails> getVetDetails(
+            @Path("slug") String slug
     );
 }
