@@ -1,5 +1,6 @@
 package com.lukmo.kamsos.Adapters;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,14 @@ import android.widget.TextView;
 import com.lukmo.kamsos.Models.Vet.Result;
 import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.R;
+import com.lukmo.kamsos.UserInterface.VetDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,8 +40,16 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
 
     @Override
     public void onBindViewHolder(VetCustomAdapter.MyViewHolder myViewHolder, int i){
-        myViewHolder.tvVet.setText(vetList.get(i).getEmail());
+        myViewHolder.tvVet.setText(vetList.get(i).getFirstName());
         Picasso.get().load(vetList.get(i).getVetImage()).into(myViewHolder.imageVet);
+
+        myViewHolder.vetCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), VetDetailActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -46,13 +57,15 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
         return vetList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView tvVet;
         ImageView imageVet;
+        CardView vetCardView;
         public MyViewHolder(View itemView){
             super(itemView);
             tvVet = (TextView) itemView.findViewById(R.id.user_name);
             imageVet = (ImageView) itemView.findViewById(R.id.vet_recycler_view_image);
+            vetCardView = (CardView) itemView.findViewById(R.id.vet_card_view);
         }
     }
 }
