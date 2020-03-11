@@ -47,6 +47,7 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), VetDetailActivity.class);
+                intent.putExtra("slug", vetList.get(i).getSlug());
                 v.getContext().startActivity(intent);
             }
         });
