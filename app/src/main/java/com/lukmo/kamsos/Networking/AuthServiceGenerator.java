@@ -14,6 +14,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -26,7 +27,7 @@ public class AuthServiceGenerator {
     public static synchronized Retrofit RequestInstance(String authToken) {
         if (retrofit == null) {
             if (gson == null) {
-                gson = new GsonBuilder().setLenient().create();
+                gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             }
             OkHttpClient.Builder client = new OkHttpClient.Builder();
 
@@ -43,7 +44,12 @@ public class AuthServiceGenerator {
 
             client.addInterceptor(headerAuthorizationInterceptor);
 
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.level(HttpLoggingInterceptor.Level.BODY);
+            client.addInterceptor(interceptor);
+
             retrofit = new Retrofit.Builder().baseUrl(Constants.BASE_URL)
+                    .client(client.build())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
