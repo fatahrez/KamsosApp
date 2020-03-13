@@ -2,6 +2,7 @@ package com.lukmo.kamsos.Networking;
 
 import com.lukmo.kamsos.Models.Login.User;
 import com.lukmo.kamsos.Models.Register.Register;
+import com.lukmo.kamsos.Models.RequestVet.RequestVet;
 import com.lukmo.kamsos.Models.Vet.Vet;
 import com.lukmo.kamsos.Models.VetDetails.VetDetails;
 
@@ -43,4 +44,8 @@ public interface UserService {
     Call<VetDetails> getVetDetails(
             @Path("slug") String slug
     );
+
+    @POST("vets/{slug}/request/")
+    @Headers("X-Requested-With:XMLHttpRequest")
+    Call<RequestVet> requestVet(@Path("slug") String slug, @Body RequestVet requestVet);
 }

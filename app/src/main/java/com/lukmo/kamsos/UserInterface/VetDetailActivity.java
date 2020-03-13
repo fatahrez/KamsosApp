@@ -5,22 +5,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.lukmo.kamsos.Models.VetDetails.Vet;
+import com.lukmo.kamsos.Models.RequestVet.RequestVet;
 import com.lukmo.kamsos.Models.VetDetails.VetDetails;
+import com.lukmo.kamsos.Networking.AuthNetworkUtils;
+import com.lukmo.kamsos.Networking.AuthServiceGenerator;
 import com.lukmo.kamsos.Presenters.VetDetailPresenter;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.UserInfrastructure.VetDetailsInfrastructure;
 import com.lukmo.kamsos.Utils.Constants;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.lukmo.kamsos.Utils.Constants.TOKEN;
 
 public class VetDetailActivity extends AppCompatActivity implements VetDetailsInfrastructure.View {
+    private static final String TAG = "VetDetailActivity";
+
     private VetDetailsInfrastructure.Presenter mPresenter;
+
     private TextView vetNameTextView;
+    private Button requestVetButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +53,42 @@ public class VetDetailActivity extends AppCompatActivity implements VetDetailsIn
     @Override
     public void init() {
         vetNameTextView = findViewById(R.id.vetNameTextView);
+        requestVetButton = findViewById(R.id.vetRequestButton);
+
         mPresenter.loadVetDetails();
+
+        requestVetButton.setOnClickListener(view -> requestVet());
+    }
+
+    private void requestVet() {
+        String token = PreferenceManager.getDefaultSharedPreferences(this).getString(TOKEN, null);
+        RequestVet requestVet = new RequestVet();
+        AuthNetworkUtils.postAuthRequest(token)
+                .requestVet(getIntent().getStringExtra("slug"), requestVet)
+                .enqueue(new Callback<RequestVet>() {
+                    @Override
+                    public void onResponse(Call<RequestVet> call, Response<RequestVet> response) {
+                        Intent intent = new Intent(VetDetailActivity.this, VetSuccessActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<RequestVet> call, Throwable t) {
+
+                    }
+                });
+//        NetworkUtils.ApiInstance().requestVet(token, getIntent().getStringExtra("slug"))
+//                .enqueue(new Callback<RequestVet>() {
+//                    @Override
+//                    public void onResponse(Call<RequestVet> call, Response<RequestVet> response) {
+//                        Log.i(TAG, "onResponse: " + response.body());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<RequestVet> call, Throwable t) {
+//
+//                    }
+//                });
     }
 
     @Override

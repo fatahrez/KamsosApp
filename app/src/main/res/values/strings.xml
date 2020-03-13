@@ -14,8 +14,13 @@
     <string name="title_account">Account</string>
     <string name="Change">Change Password</string>
 
-    <string name="vet_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
-    <string name="agrovet_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="vet_paragraph">Animal Health and Production Specialists. Contact Veterinary Doctors, Animal Health and Production Specialist just a click away</string>
+    <string name="agrovet_paragraph">Agrovets and Drugs. Visit where famers can purchase agricultural and veterinary products. Farming can be very unproductive without the products that Kenyan agrovets are stocking!</string>
     <string name="logout_menu">Logout</string>
     <string name="agrovet_feature_coming_soon">Agrovet Feature Coming Soon</string>
+    <string name="request_vet">Request Vet</string>
+    <string name="successful_">
+
+  Successful!
+</string>
 </resources>
