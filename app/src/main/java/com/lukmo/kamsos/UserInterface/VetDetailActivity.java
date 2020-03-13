@@ -68,7 +68,8 @@ public class VetDetailActivity extends AppCompatActivity implements VetDetailsIn
                 .enqueue(new Callback<RequestVet>() {
                     @Override
                     public void onResponse(Call<RequestVet> call, Response<RequestVet> response) {
-                        Log.i(TAG, "onResponse: " + response.body());
+                        Intent intent = new Intent(VetDetailActivity.this, VetSuccessActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

@@ -19,4 +19,8 @@
     <string name="logout_menu">Logout</string>
     <string name="agrovet_feature_coming_soon">Agrovet Feature Coming Soon</string>
     <string name="request_vet">Request Vet</string>
+    <string name="successful_">
+
+  Successful!
+</string>
 </resources>
