@@ -42,14 +42,13 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
     public void onBindViewHolder(VetCustomAdapter.MyViewHolder myViewHolder, int i){
         myViewHolder.tvVet.setText(vetList.get(i).getFirstName());
         Picasso.get().load(vetList.get(i).getVetImage()).into(myViewHolder.imageVet);
+        myViewHolder.middleNameTextView.setText(vetList.get(i).getMiddleName());
+        myViewHolder.lastNameTextView.setText(vetList.get(i).getLastName());
 
-        myViewHolder.vetCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), VetDetailActivity.class);
-                intent.putExtra("slug", vetList.get(i).getSlug());
-                v.getContext().startActivity(intent);
-            }
+        myViewHolder.vetCardView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), VetDetailActivity.class);
+            intent.putExtra("slug", vetList.get(i).getSlug());
+            v.getContext().startActivity(intent);
         });
     }
 
@@ -62,11 +61,18 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
         TextView tvVet;
         ImageView imageVet;
         CardView vetCardView;
+        TextView middleNameTextView;
+        TextView lastNameTextView;
         public MyViewHolder(View itemView){
             super(itemView);
             tvVet = (TextView) itemView.findViewById(R.id.user_name);
             imageVet = (ImageView) itemView.findViewById(R.id.vet_recycler_view_image);
             vetCardView = (CardView) itemView.findViewById(R.id.vet_card_view);
+            middleNameTextView = (TextView) itemView.findViewById(R.id.middleNameTextView);
+            lastNameTextView = (TextView) itemView.findViewById(R.id.lastNameTextView);
+
+            imageVet.getLayoutParams().height = 1000;
+            imageVet.requestLayout();
         }
     }
 }

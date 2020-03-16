@@ -23,4 +23,8 @@
 
   Successful!
 </string>
+    <string name="success">Success!</string>
+    <string name="your_request_has_been_received_you_will_receive_a_call_from_us">Your request has been received. You will receive a call from us.</string>
+    <string name="call_vet">Call Vet</string>
+    <string name="username">Username</string>
 </resources>

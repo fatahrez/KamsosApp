@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Success!"
+        android:text="@string/success"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -38,7 +38,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:srcCompat="@drawable/mickmark" />
+        app:srcCompat="@drawable/mickmark"
+        android:contentDescription="@string/success" />
 
     <TextView
         android:id="@+id/textView2"
@@ -49,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Your request has been received. You will receive a call from us."
+        android:text="@string/your_request_has_been_received_you_will_receive_a_call_from_us"
         android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,10 +64,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/buttonsstyle"
         android:drawableLeft="@android:drawable/stat_sys_phone_call"
-        android:text="Call Vet"
+        android:text="@string/call_vet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.15"
+        android:drawableStart="@android:drawable/stat_sys_phone_call" />
 </androidx.constraintlayout.widget.ConstraintLayout>
