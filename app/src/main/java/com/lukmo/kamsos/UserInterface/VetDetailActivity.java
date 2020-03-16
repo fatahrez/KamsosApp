@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lukmo.kamsos.Models.RequestVet.RequestVet;
@@ -19,6 +20,7 @@ import com.lukmo.kamsos.Presenters.VetDetailPresenter;
 import com.lukmo.kamsos.R;
 import com.lukmo.kamsos.UserInfrastructure.VetDetailsInfrastructure;
 import com.lukmo.kamsos.Utils.Constants;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +34,9 @@ public class VetDetailActivity extends AppCompatActivity implements VetDetailsIn
     private VetDetailsInfrastructure.Presenter mPresenter;
 
     private TextView vetNameTextView;
-    private Button requestVetButton;
+    private TextView middleNameTextView;
+    private TextView lastNameTextView;
+    private ImageView vetImageView;
 
 
     @Override
@@ -52,8 +56,13 @@ public class VetDetailActivity extends AppCompatActivity implements VetDetailsIn
 
     @Override
     public void init() {
-        vetNameTextView = findViewById(R.id.vetNameTextView);
-        requestVetButton = findViewById(R.id.vetRequestButton);
+        vetNameTextView = findViewById(R.id.firstNameTextView);
+        middleNameTextView = findViewById(R.id.middleNameTV);
+        lastNameTextView = findViewById(R.id.lastNameTV);
+
+        vetImageView = findViewById(R.id.vetImageView);
+
+        Button requestVetButton = findViewById(R.id.vetRequestButton);
 
         mPresenter.loadVetDetails();
 
@@ -94,6 +103,9 @@ public class VetDetailActivity extends AppCompatActivity implements VetDetailsIn
     @Override
     public void loadDataInVetDetail(VetDetails vetDetails) {
         vetNameTextView.setText(vetDetails.getVet().getFirstName());
+        Picasso.get().load(vetDetails.getVet().getVetImage()).into(vetImageView);
+        middleNameTextView.setText(vetDetails.getVet().getMiddleName());
+        lastNameTextView.setText(vetDetails.getVet().getLastName());
     }
 
     @Override
