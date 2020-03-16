@@ -44,6 +44,7 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
         Picasso.get().load(vetList.get(i).getVetImage()).into(myViewHolder.imageVet);
         myViewHolder.middleNameTextView.setText(vetList.get(i).getMiddleName());
         myViewHolder.lastNameTextView.setText(vetList.get(i).getLastName());
+        myViewHolder.qualificationsTextView.setText(vetList.get(i).getQualifications());
 
         myViewHolder.vetCardView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), VetDetailActivity.class);
@@ -63,6 +64,8 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
         CardView vetCardView;
         TextView middleNameTextView;
         TextView lastNameTextView;
+        TextView qualificationsTextView;
+
         public MyViewHolder(View itemView){
             super(itemView);
             tvVet = (TextView) itemView.findViewById(R.id.user_name);
@@ -70,8 +73,9 @@ public class VetCustomAdapter extends RecyclerView.Adapter<VetCustomAdapter.MyVi
             vetCardView = (CardView) itemView.findViewById(R.id.vet_card_view);
             middleNameTextView = (TextView) itemView.findViewById(R.id.middleNameTextView);
             lastNameTextView = (TextView) itemView.findViewById(R.id.lastNameTextView);
+            qualificationsTextView = (TextView) itemView.findViewById(R.id.qualifications);
 
-            imageVet.getLayoutParams().height = 1000;
+            imageVet.getLayoutParams().height = 900;
             imageVet.requestLayout();
         }
     }

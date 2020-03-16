@@ -13,14 +13,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <ImageView
             android:id="@+id/vet_recycler_view_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/vet_image" />
 
         <TextView
             android:id="@+id/user_name"
@@ -51,6 +53,28 @@
                 android:layout_margin="5dp"
                 tools:text="Last" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/qualificationTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qualifications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/qualifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Bachelors Degree"
+            android:layout_margin="5dp"/>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
